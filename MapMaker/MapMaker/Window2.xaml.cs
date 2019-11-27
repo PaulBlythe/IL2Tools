@@ -26,6 +26,19 @@ namespace MapMaker
             InitializeComponent();
         }
 
+        public Window2(ProjectSettings settings)
+        {
+            InitializeComponent();
+
+            StartLatitude.Text = settings.StartLatitude.ToString();
+            StartLongitude.Text = settings.StartLongitude.ToString();
+            CellSize.Text = settings.PixelWidthInMetres.ToString();
+            Mercator.IsChecked = settings.UseMercatorProjection;
+            PixelHeight.Text = settings.ImageHeight.ToString();
+            PixelWidth.Text = settings.ImageWidth.ToString();
+
+        }
+
         /// <summary>
         /// Cancel pressd
         /// </summary>

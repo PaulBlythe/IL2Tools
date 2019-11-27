@@ -163,6 +163,7 @@
             <MenuItem Header="_File" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}"  >
                 <MenuItem Header="New" Click="MenuItem_Click_2"/>
                 <MenuItem Header="Open" Click="MenuItem_Click_4"/>
+                <MenuItem Header="Edit" Click="EditProject"/>
                 <MenuItem Header="Save" Click="MenuItem_Click_3"/>
                 <Separator />
                 <MenuItem Header="_Exit" Click="MenuItem_Click_1"/>

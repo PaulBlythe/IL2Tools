@@ -114,6 +114,29 @@ namespace MapMaker
         }
 
         /// <summary>
+        /// Edit loaded project
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditProject(object sender, RoutedEventArgs e)
+        {
+            Window2 win = new Window2(settings);
+            bool? result = win.ShowDialog();
+            if (result.HasValue && result.Value)
+            {
+                settings = win.settings;
+
+                StartLat.Text = String.Format("Lat : {0}", settings.StartLatitude);
+                StartLon.Text = String.Format("Lon : {0}", settings.StartLongitude);
+                PixelWidth.Text = String.Format("Pix X: {0}", settings.ImageWidth);
+                PixelHeight.Text = String.Format("Pix Y: {0}", settings.ImageHeight);
+                Scale.Text = String.Format("Pix Scale: {0}", settings.PixelWidthInMetres);
+                UMercator.Text = String.Format("Mercator : {0}", settings.UseMercatorProjection);
+
+            }
+        }
+
+        /// <summary>
         /// New project
         /// </summary>
         /// <param name="sender"></param>
