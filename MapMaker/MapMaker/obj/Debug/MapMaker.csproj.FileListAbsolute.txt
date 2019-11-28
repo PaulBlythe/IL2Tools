@@ -40,3 +40,5 @@ C:\GitHub\IL2Tools\MapMaker\MapMaker\obj\Debug\MapMaker.csproj.GenerateResource.
 C:\GitHub\IL2Tools\MapMaker\MapMaker\obj\Debug\MapMaker.csproj.CoreCompileInputs.cache
 C:\GitHub\IL2Tools\MapMaker\MapMaker\obj\Debug\MapMaker.exe
 C:\GitHub\IL2Tools\MapMaker\MapMaker\obj\Debug\MapMaker.pdb
+C:\GitHub\IL2Tools\MapMaker\MapMaker\bin\Debug\data.bin
+C:\GitHub\IL2Tools\MapMaker\MapMaker\obj\Debug\MapMaker_Content.g.cs

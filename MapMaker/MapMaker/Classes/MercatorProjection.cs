@@ -11,6 +11,11 @@ namespace MapMaker
         double StartLatitude;
         double StartLongitude;
 
+        public MercatorProjection()
+        {
+            StartLatitude = StartLongitude = 0;
+        }
+
         public MercatorProjection(double slat, double slon)
         {
             StartLatitude = slat;
@@ -46,7 +51,7 @@ namespace MapMaker
         {
             d.dx += (x / d.sx);
            
-            if (d.dx>=1)
+            if (d.dx >= 1)
             {
                 d.mx++;
                 d.dx -= 1;
@@ -55,5 +60,9 @@ namespace MapMaker
             return d;
         }
 
+        public override double GetNewLongitude(double longitude, double start_latitude, double metres)
+        {
+            return longitude + metres / GetMetresPerDegreeLongitude(start_latitude) ; 
+        }
     }
 }

@@ -41,7 +41,11 @@ namespace MapMaker
         public short[] Pixels;
         public WriteableBitmap bitmap = null;
         public WriteableBitmap falseimage = null;
+        public WriteableBitmap typeoverlay = null;
+
         public SRTM[,] Map;
+        public LandTypeDatabase landdata = null;
+        public byte[] map_t;
         #endregion
 
 
@@ -62,6 +66,7 @@ namespace MapMaker
                     Status.Text = SRTMdirectory;
                 }
             }
+            landdata = new LandTypeDatabase();
             UpdateMainDisplay(0);
         }
 
@@ -111,6 +116,301 @@ namespace MapMaker
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        /// <summary>
+        /// Save map T pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveMapT(object sender, RoutedEventArgs e)
+        {
+            var dialog = new Microsoft.Win32.SaveFileDialog();
+            dialog.InitialDirectory = SRTMdirectory;
+            dialog.Title = "Save generated type map";
+            dialog.Filter = "TGA files (*.tga)|*.tga";
+
+            if (dialog.ShowDialog() == true)
+            {
+                TGAWriter.Save(map_t, settings.ImageWidth, settings.ImageHeight, dialog.FileName);
+            }
+        }
+
+        /// <summary>
+        /// Generate map t pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GenerateMapT(object sender, RoutedEventArgs e)
+        {
+            UInt32[] types = new UInt32[settings.ImageWidth * settings.ImageHeight];
+            byte[] lt = new byte[settings.ImageHeight * settings.ImageWidth];
+            List<byte> usedtypes = new List<byte>();
+            double start_lat = settings.StartLatitude;
+            int pos = 0;
+            MercatorProjection mp = new MercatorProjection();
+
+            for (int y = 0; y < settings.ImageHeight; y++)
+            {
+                double start_lon = settings.StartLongitude;
+                for (int x = 0; x < settings.ImageWidth; x++)
+                {
+                    byte t = landdata.GetType(start_lat, start_lon);
+                    if (!usedtypes.Contains(t))
+                        usedtypes.Add(t);
+
+                    lt[pos++] = t;
+                    start_lon = mp.GetNewLongitude(start_lon, start_lat, settings.PixelWidthInMetres);
+                }
+                start_lat -= (settings.PixelWidthInMetres / 111320.0);
+            }
+
+
+            for (int i = 0; i < settings.ImageWidth * settings.ImageHeight; i++)
+            {
+                byte type = lt[i];
+                short height = Pixels[i];
+
+                switch (type)
+                {
+                    case 0:         // water
+                        {
+                            if (height <= 0)
+                            {
+                                lt[i] = 28;
+                            }
+                            else
+                            {
+                                lt[i] = 0;
+                            }
+                        }
+                        break;
+                    case 1:         // Jungle
+                        {
+                            if (height == 0)
+                            {
+                                lt[i] = 29;
+                            }
+                            else
+                            {
+                                lt[i] = 27;
+                            }
+                        }
+                        break;
+                    case 2:         // Forest
+                        {
+                            if (height == 0)
+                            {
+                                lt[i] = 29;
+                            }
+                            else
+                            {
+                                lt[i] = 24;
+                            }
+                        }
+                        break;
+                    case 3:         // snow
+                        {
+                            if (height == 0)
+                            {
+                                lt[i] = 29;
+                            }
+                            else
+                            {
+                                lt[i] = 8;
+                            }
+                        }
+                        break;
+
+                    case 4:         // desert
+                        {
+                            if (height == 0)
+                            {
+                                lt[i] = 29;
+                            }
+                            else
+                            {
+                                lt[i] = 1;
+                            }
+                        }
+                        break;
+
+                    case 5:         // dry scrub
+                        {
+                            if (height == 0)
+                            {
+                                lt[i] = 29;
+                            }
+                            else
+                            {
+                                lt[i] = 2;
+                            }
+                        }
+                        break;
+
+                    case 6:         // city
+                        {
+                            if (height == 0)
+                            {
+                                lt[i] = 29;
+                            }
+                            else
+                            {
+                                lt[i] = 16;
+                            }
+                        }
+                        break;
+
+                    case 7:         // grass
+                        {
+                            if (height == 0)
+                            {
+                                lt[i] = 29;
+                            }
+                            else
+                            {
+                                lt[i] = 3;
+                            }
+                        }
+                        break;
+
+                    case 8:         // hill
+                        {
+                            if (height == 0)
+                            {
+                                lt[i] = 29;
+                            }
+                            else
+                            {
+                                lt[i] = 4;
+                            }
+                        }
+                        break;
+
+                    case 9:         // farmland
+                        {
+                            if (height == 0)
+                            {
+                                lt[i] = 29;
+                            }
+                            else
+                            {
+                                lt[i] = 5;
+                            }
+                        }
+                        break;
+
+                    case 10:         // tropical savannah
+                        {
+                            if (height == 0)
+                            {
+                                lt[i] = 29;
+                            }
+                            else
+                            {
+                                lt[i] = 6;
+                            }
+                        }
+                        break;
+
+                    case 11:         // lake
+                        {
+                            if (height == 0)
+                            {
+                                lt[i] = 29;
+                            }
+                            else
+                            {
+                                lt[i] = 30;
+                            }
+                        }
+                        break;
+
+                    case 12:         // swamp
+                        {
+                            lt[i] = 7;
+                        }
+                        break;
+
+                    case 13:         // steppe
+                        {
+                            if (height == 0)
+                            {
+                                lt[i] = 29;
+                            }
+                            else
+                            {
+                                lt[i] = 12;
+                            }
+                        }
+                        break;
+
+                    case 14:         // mixed scrub
+                        {
+                            if (height == 0)
+                            {
+                                lt[i] = 29;
+                            }
+                            else
+                            {
+                                lt[i] = 13;
+                            }
+                        }
+                        break;
+
+                    case 15:         // desert scrub
+                        {
+                            if (height == 0)
+                            {
+                                lt[i] = 29;
+                            }
+                            else
+                            {
+                                lt[i] = 14;
+                            }
+                        }
+                        break;
+
+                    case 16:         // mountain
+                        {
+                            if (height == 0)
+                            {
+                                lt[i] = 29;
+                            }
+                            else
+                            {
+                                lt[i] = 9;
+                            }
+                        }
+                        break;
+
+                    case 17:         // sand scrub
+                        {
+                            if (height == 0)
+                            {
+                                lt[i] = 29;
+                            }
+                            else
+                            {
+                                lt[i] = 15;
+                            }
+                        }
+                        break;
+                }
+
+
+            }
+            map_t = lt;
+
+            for (int i=0; i<settings.ImageHeight*settings.ImageWidth; i++)
+            {
+                types[i] = ColourMappingForMapT[lt[i]];
+            }
+
+
+            typeoverlay = new WriteableBitmap(settings.ImageWidth, settings.ImageHeight, 96, 96, PixelFormats.Pbgra32, null);
+            typeoverlay.WritePixels(new Int32Rect(0, 0, settings.ImageWidth, settings.ImageHeight), types, settings.ImageWidth * 4, 0);
+            UpdateMainDisplay(5);
         }
 
         /// <summary>
@@ -202,7 +502,7 @@ namespace MapMaker
                 Scale.Text = String.Format("Pix Scale: {0}", settings.PixelWidthInMetres);
                 UMercator.Text = String.Format("Mercator : {0}", settings.UseMercatorProjection);
 
-               
+
             }
         }
 
@@ -216,7 +516,7 @@ namespace MapMaker
             FilesDownloaded = false;
             UpdateMainDisplay(1);
             GetSRTMFiles();
-          
+
         }
 
         /// <summary>
@@ -229,9 +529,9 @@ namespace MapMaker
             if (bitmap != null)
             {
                 var dialog = new Microsoft.Win32.SaveFileDialog();
-                dialog.InitialDirectory = SRTMdirectory; 
-                dialog.Title = "Save generated image"; 
-                dialog.Filter = "PNG files (*.png)|*.png"; 
+                dialog.InitialDirectory = SRTMdirectory;
+                dialog.Title = "Save generated image";
+                dialog.Filter = "PNG files (*.png)|*.png";
 
                 if (dialog.ShowDialog() == true)
                 {
@@ -285,7 +585,7 @@ namespace MapMaker
 
                     using (BinaryWriter b = new BinaryWriter(File.Open(dialog.FileName, FileMode.Create)))
                     {
-                        for (int i=0; i<settings.ImageWidth*settings.ImageHeight; i++)
+                        for (int i = 0; i < settings.ImageWidth * settings.ImageHeight; i++)
                         {
                             b.Write(Pixels[i]);
                         }
@@ -315,7 +615,7 @@ namespace MapMaker
                     IL2Mapping map = new IL2Mapping();
                     IL2Colour[] newPixels = new IL2Colour[settings.ImageWidth * settings.ImageHeight];
 
-                    for (int i=0; i<settings.ImageHeight * settings.ImageWidth; i++)
+                    for (int i = 0; i < settings.ImageHeight * settings.ImageWidth; i++)
                     {
                         newPixels[i] = map.GetColour(Pixels[i]);
                     }
@@ -516,7 +816,7 @@ namespace MapMaker
 
                             for (int i = 0; i < length; i++)
                             {
-                               scaled_pixels[i] = ((float)Pixels[i] - (float)minValue) / (float)(maxValue-minValue);
+                                scaled_pixels[i] = ((float)Pixels[i] - (float)minValue) / (float)(maxValue - minValue);
 
                             }
 
@@ -524,9 +824,33 @@ namespace MapMaker
                             falseimage.WritePixels(new Int32Rect(0, 0, settings.ImageWidth, settings.ImageHeight), scaled_pixels, settings.ImageWidth * 4, 0);
                         }
 
-                        var sbitmap = new TransformedBitmap(falseimage, new ScaleTransform( 800.0f / falseimage.PixelWidth, 800.0f / falseimage.PixelHeight));
+                        var sbitmap = new TransformedBitmap(falseimage, new ScaleTransform(800.0f / falseimage.PixelWidth, 800.0f / falseimage.PixelHeight));
 
                         Image img = new Image();
+                        img.Source = sbitmap;
+                        MainDisplay.Children.Add(img);
+
+                        Canvas.SetTop(img, 20);
+                        Canvas.SetLeft(img, 420);
+                    }
+                    break;
+                #endregion
+
+                #region display overlay
+                case 5:
+                    {
+                        var sbitmap = new TransformedBitmap(falseimage, new ScaleTransform(800.0f / falseimage.PixelWidth, 800.0f / falseimage.PixelHeight));
+
+                        Image img = new Image();
+                        img.Source = sbitmap;
+                        MainDisplay.Children.Add(img);
+
+                        Canvas.SetTop(img, 20);
+                        Canvas.SetLeft(img, 420);
+
+                        sbitmap = new TransformedBitmap(typeoverlay, new ScaleTransform(800.0f / typeoverlay.PixelWidth, 800.0f / typeoverlay.PixelHeight));
+
+                        img = new Image();
                         img.Source = sbitmap;
                         MainDisplay.Children.Add(img);
 
@@ -581,16 +905,16 @@ namespace MapMaker
             MainWindow parent = MainWindow.Instance;
             MercatorProjection mp = new MercatorProjection(settings.StartLatitude, settings.StartLongitude);
             Pixels = new short[settings.ImageWidth * settings.ImageHeight];
-          
-           
+
+
             int pos = 0;
-            for (int y=0; y<settings.ImageHeight; y++)
+            for (int y = 0; y < settings.ImageHeight; y++)
             {
                 parent.downloadstatus = String.Format("Line {0}", y);
                 parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(3)));
                 double nl = mp.GetNewLatitude(settings.StartLatitude, y * settings.PixelWidthInMetres);
                 Delta d = mp.GetDelta(nl, settings.StartLongitude);
-                for (int x=0; x<settings.ImageWidth; x++)
+                for (int x = 0; x < settings.ImageWidth; x++)
                 {
                     Pixels[pos + x] = Map[d.mx, d.my].GetHeight(d, settings.PixelWidthInMetres);
                     d = mp.Step(d, settings.PixelWidthInMetres);
@@ -605,7 +929,7 @@ namespace MapMaker
                 //       );
                 pos += settings.ImageWidth;
             }
-            
+
 
         }
 
@@ -623,7 +947,7 @@ namespace MapMaker
             int LatHeight = (int)(height_in_metres / 111320.0) + 1;
 
 
-            for (int i = 0; i < LatHeight ; i++)
+            for (int i = 0; i < LatHeight; i++)
             {
                 for (int j = 0; j < LonWidth; j++)
                 {
@@ -836,5 +1160,67 @@ namespace MapMaker
             }
         }
 
+
+        #region Data tables
+        LandTypeRecord[] LandTypes = new LandTypeRecord[]
+        {
+            new LandTypeRecord(24, 24, 128, "water"),
+            new LandTypeRecord(50, 205, 49, "jungle"),
+            new LandTypeRecord(33, 138, 33, "forest"),
+            new LandTypeRecord(255, 255, 249, "snow"),
+            new LandTypeRecord(189, 189, 189, "desert"),
+            new LandTypeRecord(245, 222, 180, "dryscrub"),
+            new LandTypeRecord(254, 0, 0, "city"),
+            new LandTypeRecord(249, 237, 115, "grassland"),
+            new LandTypeRecord(144, 187, 142, "hill"),
+            new LandTypeRecord(240, 183, 104, "farmland"),
+            new LandTypeRecord(255, 214, 0, "tropical savana"),
+            new LandTypeRecord(70, 131, 178, "lake"),
+            new LandTypeRecord(255, 214, 0, "swamp"),
+            new LandTypeRecord(154, 205, 50, "steppe"),
+            new LandTypeRecord(153, 249, 151, "mixed scrub"),
+            new LandTypeRecord(218, 235, 157, "desert scrub"),
+            new LandTypeRecord(151, 147, 84, "mountain"),
+            new LandTypeRecord(188, 142, 144, "sand scrub")
+
+        };
+
+        UInt32[] ColourMappingForMapT = new UInt32[]
+        {
+                0x80a0ff00,     // 0    Lowland near water
+                0x80ffff00,     // 1    Desert
+                0x8080ff00,     // 2    Dry scrub
+                0x8000ff00,     // 3    Grass
+                0x80008000,     // 4    Hill
+                0x8000a000,     // 5    Farmland
+                0x8080ff00,     // 6    Tropical savannah
+                0x80009080,     // 7    Swamp
+                0x80ffffff,     // 8    Snow
+                0x80808080,     // 9    Mountain
+                0x00000000,     // 10
+                0x00000000,     // 11
+                0x8040a000,     // 12   Steppe
+                0x8040ff40,     // 13   Mixed scrub
+                0x80808000,     // 14   Desert scrub
+                0x80a0a000,     // 15   Sand scrub
+                0x80404040,     // 16   City
+                0x00000000,         // 17
+                0x00000000,         // 18
+                0x00000000,         // 19
+                0x00000000,         // 20
+                0x00000000,         // 21
+                0x00000000,         // 22
+                0x00000000,         // 23
+                0x8080a020,         // 24   Forest
+                0x00000000,         // 25
+                0x00000000,         // 26
+                0x8060ff40,         // 27   Jungle
+                0x800020ff,         // 28   Sea
+                0x800060ff,         // 29   Water in land 
+                0x800080ff,         // 30   Lake
+                0x00000000       // 31
+
+        };
+        #endregion
     }
 }

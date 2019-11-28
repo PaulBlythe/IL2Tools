@@ -64,6 +64,8 @@
     <Compile Include="Classes\IL2Colour.cs" />
     <Compile Include="Classes\IL2Mapping.cs" />
     <Compile Include="Classes\TGAWriter.cs" />
+    <Compile Include="Classes\LandTypeDatabase.cs" />
+    <Compile Include="Classes\LandTypeRecord.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
@@ -116,6 +118,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="data.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

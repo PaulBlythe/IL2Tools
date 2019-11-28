@@ -177,6 +177,10 @@
                 <MenuItem Header="Save results as raw data" Click="RAWSave"/>
                 <MenuItem Header="Save results as IL2 map_h" Click="IL2Save"/>
             </MenuItem>
+            <MenuItem Header="_Extras" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}"  >
+                <MenuItem Header="Generate type map" Click="GenerateMapT"/>
+                <MenuItem Header="Save type map" Click="SaveMapT"/>
+            </MenuItem>
             <MenuItem Header="Options" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}"  >
                 <MenuItem Header="SRTM Directory" Click="MenuItem_Click"/>
             </MenuItem>
