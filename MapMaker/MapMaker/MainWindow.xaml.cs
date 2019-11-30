@@ -19,6 +19,8 @@ using Microsoft.Win32;
 
 namespace MapMaker
 {
+    public delegate void UpdateMainDisplayDelegate(int state);
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -47,6 +49,8 @@ namespace MapMaker
         public LandTypeDatabase landdata = null;
         public byte[] map_t;
 
+        UpdateMainDisplayDelegate UpdateMainDisplay;
+
         public List<ShapeFile> Overlays = new List<ShapeFile>();
 
         #endregion
@@ -70,8 +74,15 @@ namespace MapMaker
                 }
             }
             landdata = new LandTypeDatabase();
+
+            UpdateMainDisplay = (int state) =>
+            {
+                Dispatcher.BeginInvoke((Action)(() => UpdateMainDisplayImpl(state)));
+            };
+
             UpdateMainDisplay(0);
         }
+
 
         private void OpenFileMenu(object sender, RoutedEventArgs e)
         {
@@ -664,7 +675,7 @@ namespace MapMaker
         /// Canvas display handler
         /// </summary>
         /// <param name="state"></param>
-        public void UpdateMainDisplay(int state)
+        public void UpdateMainDisplayImpl(int state)
         {
             MainDisplay.Children.Clear();
 
@@ -931,7 +942,7 @@ namespace MapMaker
             for (int y = 0; y < settings.ImageHeight; y++)
             {
                 parent.downloadstatus = String.Format("Line {0}", y);
-                parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(3)));
+                UpdateMainDisplay(3);
                 double nl = mp.GetNewLatitude(settings.StartLatitude, y * settings.PixelWidthInMetres);
                 Delta d = mp.GetDelta(nl, settings.StartLongitude);
                 for (int x = 0; x < settings.ImageWidth; x++)
@@ -1002,11 +1013,11 @@ namespace MapMaker
         public static void BuildAll()
         {
             MainWindow parent = MainWindow.Instance;
-            parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(2)));
+            parent.UpdateMainDisplay(2);
             parent.BuildVirtualMap();
-            parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(3)));
+            parent.UpdateMainDisplay(3);
             parent.BuildImage();
-            parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(4)));
+            parent.UpdateMainDisplay(4);
         }
 
         /// <summary>
@@ -1060,7 +1071,7 @@ namespace MapMaker
                 bool missing = false;
                 String file = parent.SRTMdirectory + @"\" + parent.RequiredFiles[i] + ".zip";
                 parent.download_task = "Downloading " + file;
-                parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(1)));
+                parent.UpdateMainDisplay(1);
 
                 if (!File.Exists(file))
                 {
@@ -1125,14 +1136,14 @@ namespace MapMaker
                     lock (parent.RequiredFiles)
                     {
                         parent.RequiredFiles.RemoveAt(i);
-                        parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(1)));
+                        parent.UpdateMainDisplay(1);
                     }
                     Thread.Sleep(50);
                 }
                 i--;
             }
             parent.download_task = "Extracting files";
-            parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(1)));
+            parent.UpdateMainDisplay(1);
 
             foreach (String s in parent.ziplist)
             {
@@ -1144,14 +1155,14 @@ namespace MapMaker
 
             }
             parent.download_task = "Loading SRTM files";
-            parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(1)));
+            parent.UpdateMainDisplay(1);
             parent.ziplist.Clear();
 
-            parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(2)));
+            parent.UpdateMainDisplay(2);
             parent.BuildVirtualMap();
-            parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(3)));
+            parent.UpdateMainDisplay(3);
             parent.BuildImage();
-            parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(4)));
+            parent.UpdateMainDisplay(4);
             parent.FilesDownloaded = true;
         }
 
