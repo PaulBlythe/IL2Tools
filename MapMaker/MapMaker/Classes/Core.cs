@@ -22,6 +22,7 @@ namespace MapMaker
         WebClient wc = new WebClient();
 
         public List<String> RequiredFiles = new List<string>();
+        UnavailableFilesList UnAvailableFiles = new UnavailableFilesList();
         List<String> ziplist = new List<string>();
 
         public String downloadstatus = "";
@@ -463,6 +464,7 @@ namespace MapMaker
             double height_in_metres = settings.PixelWidthInMetres * settings.ImageHeight;
             int LatHeight = (int)(height_in_metres / 111320.0) + 1;
 
+            UnAvailableFiles.SetDirectory(SRTMdirectory);
 
             for (int i = 0; i < LatHeight; i++)
             {
@@ -479,11 +481,10 @@ namespace MapMaker
             {
                 String fn = System.IO.Path.Combine(SRTMdirectory, RequiredFiles[i]);
                 fn += ".hgt";
-                if (File.Exists(fn))
+                if (UnAvailableFiles.Contains(RequiredFiles[i]) || File.Exists(fn))
                 {
                     RequiredFiles.RemoveAt(i);
                     UpdateMainDisplay(1);
-
                 }
             }
 
@@ -566,32 +567,31 @@ namespace MapMaker
                                         if (DoesFileExist(url))
                                         {
                                             DownloadFile(url, file);
-
                                         }
                                         else
                                         {
                                             missing = true;
-
                                         }
                                     }
                                 }
                             }
                         }
                     }
-                }
-                if (missing)
-                {
 
-                }
-                else
-                {
-                    lock (parent.RequiredFiles)
-                    {
-                        parent.RequiredFiles.RemoveAt(i);
-                        parent.UpdateMainDisplay(1);
-                    }
                     Thread.Sleep(50);
                 }
+
+                if (missing)
+                {
+                    parent.UnAvailableFiles.Add(parent.RequiredFiles[i]);
+                }
+
+                lock (parent.RequiredFiles)
+                {
+                    parent.RequiredFiles.RemoveAt(i);
+                }
+
+                parent.UpdateMainDisplay(1);
                 i--;
             }
             parent.download_task = "Extracting files";
