@@ -46,6 +46,9 @@ namespace MapMaker
         public SRTM[,] Map;
         public LandTypeDatabase landdata = null;
         public byte[] map_t;
+
+        public List<ShapeFile> Overlays = new List<ShapeFile>();
+
         #endregion
 
 
@@ -116,6 +119,23 @@ namespace MapMaker
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        /// <summary>
+        /// Exit pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LoadShapeFile(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "SHAPE files (*.shp)|*.shp";
+            ofd.DefaultExt = "*.shp";
+            if (ofd.ShowDialog() == true)
+            {
+                Overlays.Add(new ShapeFile(ofd.FileName));
+                DrawOverlays();
+            }
         }
 
         /// <summary>
@@ -988,6 +1008,44 @@ namespace MapMaker
             parent.BuildImage();
             parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(4)));
         }
+
+        /// <summary>
+        /// Draw any overlay files into the map_t image
+        /// </summary>
+        private void DrawOverlays()
+        {
+            if (Overlays.Count == 0)
+                return;
+
+            if (typeoverlay == null)
+                return;
+
+            #region Create a bounding region in latitude and longitude
+            MercatorProjection mp = new MercatorProjection(settings.StartLatitude, settings.StartLongitude);
+            Region r = mp.GetRegion(settings.ImageWidth, settings.ImageHeight, (int)settings.PixelWidthInMetres);           
+            #endregion
+
+            foreach (ShapeFile s in Overlays)
+            {
+                s.Draw(map_t, 32, r, mp, (int)settings.PixelWidthInMetres, settings.ImageWidth, settings.ImageHeight);
+            }
+            UInt32[] types = new UInt32[settings.ImageHeight * settings.ImageWidth];
+
+            for (int i = 0; i < settings.ImageHeight * settings.ImageWidth; i++)
+            {
+                byte baset = map_t[i];
+                if ((baset & 32) == 0)
+                    types[i] = ColourMappingForMapT[map_t[i]];
+                else
+                    types[i] = 0xffff0000;
+            }
+
+            typeoverlay.WritePixels(new Int32Rect(0, 0, settings.ImageWidth, settings.ImageHeight), types, settings.ImageWidth * 4, 0);
+            UpdateMainDisplay(5);
+        }
+
+        #region Thread handlers
+
         /// <summary>
         /// Thread based file downloader, plus does all the other work
         /// </summary>
@@ -1160,6 +1218,7 @@ namespace MapMaker
             }
         }
 
+        #endregion
 
         #region Data tables
         LandTypeRecord[] LandTypes = new LandTypeRecord[]
@@ -1204,21 +1263,21 @@ namespace MapMaker
                 0x80808000,     // 14   Desert scrub
                 0x80a0a000,     // 15   Sand scrub
                 0x80404040,     // 16   City
-                0x00000000,         // 17
-                0x00000000,         // 18
-                0x00000000,         // 19
-                0x00000000,         // 20
-                0x00000000,         // 21
-                0x00000000,         // 22
-                0x00000000,         // 23
-                0x8080a020,         // 24   Forest
-                0x00000000,         // 25
-                0x00000000,         // 26
-                0x8060ff40,         // 27   Jungle
-                0x800020ff,         // 28   Sea
-                0x800060ff,         // 29   Water in land 
-                0x800080ff,         // 30   Lake
-                0x00000000       // 31
+                0x00000000,     // 17
+                0x00000000,     // 18
+                0x00000000,     // 19
+                0x00000000,     // 20
+                0x00000000,     // 21
+                0x00000000,     // 22
+                0x00000000,     // 23
+                0x8080a020,     // 24   Forest
+                0x00000000,     // 25
+                0x00000000,     // 26
+                0x8060ff40,     // 27   Jungle
+                0x800020ff,     // 28   Sea
+                0x800060ff,     // 29   Water in land 
+                0x800080ff,     // 30   Lake
+                0x00000000      // 31
 
         };
         #endregion

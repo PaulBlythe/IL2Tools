@@ -64,5 +64,46 @@ namespace MapMaker
         {
             return longitude + metres / GetMetresPerDegreeLongitude(start_latitude) ; 
         }
+
+        public override Region GetRegion(int width, int height, int scale)
+        {
+            Region r = new Region();
+            r.MinX = StartLongitude;
+            r.MaxY = StartLatitude;
+
+            double w1 = (width * scale) / (GetMetresPerDegreeLongitude(StartLatitude));
+            double l2 = StartLatitude - (height * scale) / 111320.0;
+            double w2 = (width * scale) / (GetMetresPerDegreeLongitude(l2));           
+            r.MinY = l2;
+
+            if (w2 > w1)
+            {
+                w1 = w2;
+            }
+            r.MaxX = r.MinX + w1;
+
+            return r;
+        }
+
+        /// <summary>
+        /// Takes longitude, latitude and projects it into pixel space
+        /// </summary>
+        /// <param name="x">longitude</param>
+        /// <param name="y">latitude</param>
+        /// <returns></returns>
+        public override IntPoint Project(double x, double y, int scale)
+        {
+            IntPoint res = new IntPoint(0, 0);
+
+            double dy = StartLatitude - y;
+            dy *= 111320.0;
+            res.y1 = (int)(dy / scale);
+
+            double dx = x - StartLongitude;
+            dx *= GetMetresPerDegreeLongitude(x);
+            res.x1 = (int)(dx / scale);
+
+            return res;
+        }
     }
 }

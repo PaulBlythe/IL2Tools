@@ -58,6 +58,12 @@
     </ApplicationDefinition>
     <Compile Include="Classes\Delta.cs" />
     <Compile Include="Classes\ProjectSettings.cs" />
+    <Compile Include="Classes\SHP\SHPElement.cs" />
+    <Compile Include="Classes\SHP\SHPMultiPoint.cs" />
+    <Compile Include="Classes\SHP\SHPPoint.cs" />
+    <Compile Include="Classes\SHP\SHPPointZ.cs" />
+    <Compile Include="Classes\SHP\SHPPolygon.cs" />
+    <Compile Include="Classes\SHP\SHPPolyLine.cs" />
     <Compile Include="Classes\SRTM.cs" />
     <Compile Include="Classes\MapProjection.cs" />
     <Compile Include="Classes\MercatorProjection.cs" />
@@ -66,6 +72,10 @@
     <Compile Include="Classes\TGAWriter.cs" />
     <Compile Include="Classes\LandTypeDatabase.cs" />
     <Compile Include="Classes\LandTypeRecord.cs" />
+    <Compile Include="Classes\ShapeFile.cs" />
+    <Compile Include="Classes\Region.cs" />
+    <Compile Include="Classes\IntPoint.cs" />
+    <Compile Include="Classes\DoublePoint.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>

@@ -179,6 +179,7 @@
             </MenuItem>
             <MenuItem Header="_Extras" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}"  >
                 <MenuItem Header="Generate type map" Click="GenerateMapT"/>
+                <MenuItem Header="Add road shape file as overlay" Click="LoadShapeFile"/>
                 <MenuItem Header="Save type map" Click="SaveMapT"/>
             </MenuItem>
             <MenuItem Header="Options" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}"  >
