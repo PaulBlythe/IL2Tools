@@ -530,7 +530,8 @@ namespace MapMaker
             while (i >= 0)
             {
                 bool missing = false;
-                String file = parent.SRTMdirectory + @"\" + parent.RequiredFiles[i] + ".zip";
+                String file = System.IO.Path.Combine(parent.SRTMdirectory,
+                                                     parent.RequiredFiles[i]) + ".zip";
                 parent.download_task = "Downloading " + file;
                 parent.UpdateMainDisplay(1);
 
