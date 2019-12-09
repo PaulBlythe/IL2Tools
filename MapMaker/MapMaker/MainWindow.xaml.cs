@@ -19,36 +19,18 @@ using Microsoft.Win32;
 
 namespace MapMaker
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public static MainWindow Instance;
 
         #region Storage
-        String SRTMdirectory = "";
-        ProjectSettings settings = new ProjectSettings();
-        WebClient wc = new WebClient();
-
-        List<String> RequiredFiles = new List<string>();
-        List<String> ziplist = new List<string>();
-
-        String downloadstatus = "";
-        public String download_task = "";
-        public bool FilesDownloaded = false;
-
-        public short[] Pixels;
         public WriteableBitmap bitmap = null;
         public WriteableBitmap falseimage = null;
         public WriteableBitmap typeoverlay = null;
 
-        public SRTM[,] Map;
-        public LandTypeDatabase landdata = null;
-        public byte[] map_t;
-
         public List<ShapeFile> Overlays = new List<ShapeFile>();
 
+        Core core = new Core();
         #endregion
 
 
@@ -58,19 +40,18 @@ namespace MapMaker
             InitializeComponent();
             Closing += OnWindowClosing;
 
-            String p = System.AppDomain.CurrentDomain.BaseDirectory;
-            p = System.IO.Path.Combine(p, "settings.txt");
-
-            if (File.Exists(p))
+            core.UpdateMainDisplay = (int state) =>
             {
-                using (StreamReader sr = new StreamReader(p))
-                {
-                    SRTMdirectory = sr.ReadLine();
-                    Status.Text = SRTMdirectory;
-                }
-            }
-            landdata = new LandTypeDatabase();
-            UpdateMainDisplay(0);
+                Dispatcher.BeginInvoke((Action)(() => UpdateMainDisplayImpl(state)));
+            };
+
+            core.SetStatusText = (string text) =>
+            {
+                Status.Text = text;
+            };
+
+            core.SetStatusText(core.SRTMdirectory);
+            core.UpdateMainDisplay(0);
         }
 
         private void OpenFileMenu(object sender, RoutedEventArgs e)
@@ -85,13 +66,7 @@ namespace MapMaker
         /// <param name="e"></param>
         public void OnWindowClosing(object sender, CancelEventArgs e)
         {
-            String p = System.AppDomain.CurrentDomain.BaseDirectory;
-            p = System.IO.Path.Combine(p, "settings.txt");
-            using (TextWriter writer = File.CreateText(p))
-            {
-                writer.WriteLine(SRTMdirectory);
-            }
-
+            core.SaveSettings();
         }
 
         /// <summary>
@@ -106,7 +81,7 @@ namespace MapMaker
             bool? result = win.ShowDialog();
             if (result.HasValue && result.Value)
             {
-                SRTMdirectory = win.Path;
+                core.SRTMdirectory = win.Path;
                 Status.Text = win.Path;
             }
         }
@@ -146,13 +121,13 @@ namespace MapMaker
         private void SaveMapT(object sender, RoutedEventArgs e)
         {
             var dialog = new Microsoft.Win32.SaveFileDialog();
-            dialog.InitialDirectory = SRTMdirectory;
+            dialog.InitialDirectory = core.SRTMdirectory;
             dialog.Title = "Save generated type map";
             dialog.Filter = "TGA files (*.tga)|*.tga";
 
             if (dialog.ShowDialog() == true)
             {
-                TGAWriter.Save(map_t, settings.ImageWidth, settings.ImageHeight, dialog.FileName);
+                core.SaveMapT(dialog.FileName);
             }
         }
 
@@ -163,274 +138,21 @@ namespace MapMaker
         /// <param name="e"></param>
         private void GenerateMapT(object sender, RoutedEventArgs e)
         {
-            UInt32[] types = new UInt32[settings.ImageWidth * settings.ImageHeight];
-            byte[] lt = new byte[settings.ImageHeight * settings.ImageWidth];
-            List<byte> usedtypes = new List<byte>();
-            double start_lat = settings.StartLatitude;
-            int pos = 0;
-            MercatorProjection mp = new MercatorProjection();
-
-            for (int y = 0; y < settings.ImageHeight; y++)
-            {
-                double start_lon = settings.StartLongitude;
-                for (int x = 0; x < settings.ImageWidth; x++)
-                {
-                    byte t = landdata.GetType(start_lat, start_lon);
-                    if (!usedtypes.Contains(t))
-                        usedtypes.Add(t);
-
-                    lt[pos++] = t;
-                    start_lon = mp.GetNewLongitude(start_lon, start_lat, settings.PixelWidthInMetres);
-                }
-                start_lat -= (settings.PixelWidthInMetres / 111320.0);
-            }
-
-
-            for (int i = 0; i < settings.ImageWidth * settings.ImageHeight; i++)
-            {
-                byte type = lt[i];
-                short height = Pixels[i];
-
-                switch (type)
-                {
-                    case 0:         // water
-                        {
-                            if (height <= 0)
-                            {
-                                lt[i] = 28;
-                            }
-                            else
-                            {
-                                lt[i] = 0;
-                            }
-                        }
-                        break;
-                    case 1:         // Jungle
-                        {
-                            if (height == 0)
-                            {
-                                lt[i] = 29;
-                            }
-                            else
-                            {
-                                lt[i] = 27;
-                            }
-                        }
-                        break;
-                    case 2:         // Forest
-                        {
-                            if (height == 0)
-                            {
-                                lt[i] = 29;
-                            }
-                            else
-                            {
-                                lt[i] = 24;
-                            }
-                        }
-                        break;
-                    case 3:         // snow
-                        {
-                            if (height == 0)
-                            {
-                                lt[i] = 29;
-                            }
-                            else
-                            {
-                                lt[i] = 8;
-                            }
-                        }
-                        break;
-
-                    case 4:         // desert
-                        {
-                            if (height == 0)
-                            {
-                                lt[i] = 29;
-                            }
-                            else
-                            {
-                                lt[i] = 1;
-                            }
-                        }
-                        break;
-
-                    case 5:         // dry scrub
-                        {
-                            if (height == 0)
-                            {
-                                lt[i] = 29;
-                            }
-                            else
-                            {
-                                lt[i] = 2;
-                            }
-                        }
-                        break;
-
-                    case 6:         // city
-                        {
-                            if (height == 0)
-                            {
-                                lt[i] = 29;
-                            }
-                            else
-                            {
-                                lt[i] = 16;
-                            }
-                        }
-                        break;
-
-                    case 7:         // grass
-                        {
-                            if (height == 0)
-                            {
-                                lt[i] = 29;
-                            }
-                            else
-                            {
-                                lt[i] = 3;
-                            }
-                        }
-                        break;
-
-                    case 8:         // hill
-                        {
-                            if (height == 0)
-                            {
-                                lt[i] = 29;
-                            }
-                            else
-                            {
-                                lt[i] = 4;
-                            }
-                        }
-                        break;
-
-                    case 9:         // farmland
-                        {
-                            if (height == 0)
-                            {
-                                lt[i] = 29;
-                            }
-                            else
-                            {
-                                lt[i] = 5;
-                            }
-                        }
-                        break;
-
-                    case 10:         // tropical savannah
-                        {
-                            if (height == 0)
-                            {
-                                lt[i] = 29;
-                            }
-                            else
-                            {
-                                lt[i] = 6;
-                            }
-                        }
-                        break;
-
-                    case 11:         // lake
-                        {
-                            if (height == 0)
-                            {
-                                lt[i] = 29;
-                            }
-                            else
-                            {
-                                lt[i] = 30;
-                            }
-                        }
-                        break;
-
-                    case 12:         // swamp
-                        {
-                            lt[i] = 7;
-                        }
-                        break;
-
-                    case 13:         // steppe
-                        {
-                            if (height == 0)
-                            {
-                                lt[i] = 29;
-                            }
-                            else
-                            {
-                                lt[i] = 12;
-                            }
-                        }
-                        break;
-
-                    case 14:         // mixed scrub
-                        {
-                            if (height == 0)
-                            {
-                                lt[i] = 29;
-                            }
-                            else
-                            {
-                                lt[i] = 13;
-                            }
-                        }
-                        break;
-
-                    case 15:         // desert scrub
-                        {
-                            if (height == 0)
-                            {
-                                lt[i] = 29;
-                            }
-                            else
-                            {
-                                lt[i] = 14;
-                            }
-                        }
-                        break;
-
-                    case 16:         // mountain
-                        {
-                            if (height == 0)
-                            {
-                                lt[i] = 29;
-                            }
-                            else
-                            {
-                                lt[i] = 9;
-                            }
-                        }
-                        break;
-
-                    case 17:         // sand scrub
-                        {
-                            if (height == 0)
-                            {
-                                lt[i] = 29;
-                            }
-                            else
-                            {
-                                lt[i] = 15;
-                            }
-                        }
-                        break;
-                }
-
-
-            }
-            map_t = lt;
-
-            for (int i=0; i<settings.ImageHeight*settings.ImageWidth; i++)
-            {
-                types[i] = ColourMappingForMapT[lt[i]];
-            }
-
-
+            core.GenerateMapT();
+            var settings = core.settings;
             typeoverlay = new WriteableBitmap(settings.ImageWidth, settings.ImageHeight, 96, 96, PixelFormats.Pbgra32, null);
-            typeoverlay.WritePixels(new Int32Rect(0, 0, settings.ImageWidth, settings.ImageHeight), types, settings.ImageWidth * 4, 0);
-            UpdateMainDisplay(5);
+            typeoverlay.WritePixels(new Int32Rect(0, 0, settings.ImageWidth, settings.ImageHeight), core.types, settings.ImageWidth * 4, 0);
+            core.UpdateMainDisplay(5);
+        }
+
+        void RefreshStatusBar()
+        {
+            StartLat.Text = String.Format("Lat : {0}", core.settings.StartLatitude);
+            StartLon.Text = String.Format("Lon : {0}", core.settings.StartLongitude);
+            PixelWidth.Text = String.Format("Pix X: {0}", core.settings.ImageWidth);
+            PixelHeight.Text = String.Format("Pix Y: {0}", core.settings.ImageHeight);
+            Scale.Text = String.Format("Pix Scale: {0}", core.settings.PixelWidthInMetres);
+            UMercator.Text = String.Format("Mercator : {0}", core.settings.UseMercatorProjection);
         }
 
         /// <summary>
@@ -440,19 +162,12 @@ namespace MapMaker
         /// <param name="e"></param>
         private void EditProject(object sender, RoutedEventArgs e)
         {
-            Window2 win = new Window2(settings);
+            Window2 win = new Window2(core.settings);
             bool? result = win.ShowDialog();
             if (result.HasValue && result.Value)
             {
-                settings = win.settings;
-
-                StartLat.Text = String.Format("Lat : {0}", settings.StartLatitude);
-                StartLon.Text = String.Format("Lon : {0}", settings.StartLongitude);
-                PixelWidth.Text = String.Format("Pix X: {0}", settings.ImageWidth);
-                PixelHeight.Text = String.Format("Pix Y: {0}", settings.ImageHeight);
-                Scale.Text = String.Format("Pix Scale: {0}", settings.PixelWidthInMetres);
-                UMercator.Text = String.Format("Mercator : {0}", settings.UseMercatorProjection);
-
+                core.settings = win.settings;
+                RefreshStatusBar();
             }
         }
 
@@ -467,15 +182,8 @@ namespace MapMaker
             bool? result = win.ShowDialog();
             if (result.HasValue && result.Value)
             {
-                settings = win.settings;
-
-                StartLat.Text = String.Format("Lat : {0}", settings.StartLatitude);
-                StartLon.Text = String.Format("Lon : {0}", settings.StartLongitude);
-                PixelWidth.Text = String.Format("Pix X: {0}", settings.ImageWidth);
-                PixelHeight.Text = String.Format("Pix Y: {0}", settings.ImageHeight);
-                Scale.Text = String.Format("Pix Scale: {0}", settings.PixelWidthInMetres);
-                UMercator.Text = String.Format("Mercator : {0}", settings.UseMercatorProjection);
-
+                core.settings = win.settings;
+                RefreshStatusBar();
             }
         }
 
@@ -493,7 +201,7 @@ namespace MapMaker
             {
                 using (BinaryWriter writer = new BinaryWriter(File.Open(sfd.FileName, FileMode.Create)))
                 {
-                    settings.Save(writer);
+                    core.settings.Save(writer);
                 }
             }
         }
@@ -512,17 +220,9 @@ namespace MapMaker
             {
                 using (BinaryReader writer = new BinaryReader(File.Open(ofd.FileName, FileMode.Open)))
                 {
-                    settings.Load(writer);
+                    core.settings.Load(writer);
                 }
-
-                StartLat.Text = String.Format("Lat : {0}", settings.StartLatitude);
-                StartLon.Text = String.Format("Lon : {0}", settings.StartLongitude);
-                PixelWidth.Text = String.Format("Pix X: {0}", settings.ImageWidth);
-                PixelHeight.Text = String.Format("Pix Y: {0}", settings.ImageHeight);
-                Scale.Text = String.Format("Pix Scale: {0}", settings.PixelWidthInMetres);
-                UMercator.Text = String.Format("Mercator : {0}", settings.UseMercatorProjection);
-
-
+                RefreshStatusBar();
             }
         }
 
@@ -533,10 +233,7 @@ namespace MapMaker
         /// <param name="e"></param>
         private void GenerateMap(object sender, RoutedEventArgs e)
         {
-            FilesDownloaded = false;
-            UpdateMainDisplay(1);
-            GetSRTMFiles();
-
+            core.GenerateMap();
         }
 
         /// <summary>
@@ -549,7 +246,7 @@ namespace MapMaker
             if (bitmap != null)
             {
                 var dialog = new Microsoft.Win32.SaveFileDialog();
-                dialog.InitialDirectory = SRTMdirectory;
+                dialog.InitialDirectory = core.SRTMdirectory;
                 dialog.Title = "Save generated image";
                 dialog.Filter = "PNG files (*.png)|*.png";
 
@@ -575,13 +272,15 @@ namespace MapMaker
             if (bitmap != null)
             {
                 var dialog = new Microsoft.Win32.SaveFileDialog();
-                dialog.InitialDirectory = SRTMdirectory;
+                dialog.InitialDirectory = core.SRTMdirectory;
                 dialog.Title = "Save generated image";
                 dialog.Filter = "TGA files (*.tga)|*.tga";
 
+                var settings = core.settings;
+
                 if (dialog.ShowDialog() == true)
                 {
-                    TGAWriter.Save(Pixels, settings.ImageWidth, settings.ImageHeight, dialog.FileName);
+                    TGAWriter.Save(core.Pixels, settings.ImageWidth, settings.ImageHeight, dialog.FileName);
                 }
             }
         }
@@ -596,20 +295,13 @@ namespace MapMaker
             if (bitmap != null)
             {
                 var dialog = new Microsoft.Win32.SaveFileDialog();
-                dialog.InitialDirectory = SRTMdirectory;
+                dialog.InitialDirectory = core.SRTMdirectory;
                 dialog.Title = "Save generated image";
                 dialog.Filter = "RAW files (*.raw)|*.raw";
 
                 if (dialog.ShowDialog() == true)
                 {
-
-                    using (BinaryWriter b = new BinaryWriter(File.Open(dialog.FileName, FileMode.Create)))
-                    {
-                        for (int i = 0; i < settings.ImageWidth * settings.ImageHeight; i++)
-                        {
-                            b.Write(Pixels[i]);
-                        }
-                    }
+                    core.RawSave(dialog.FileName);
                 }
             }
         }
@@ -624,24 +316,14 @@ namespace MapMaker
             if (bitmap != null)
             {
                 var dialog = new Microsoft.Win32.SaveFileDialog();
-                dialog.InitialDirectory = SRTMdirectory;
+                dialog.InitialDirectory = core.SRTMdirectory;
                 dialog.Title = "Save generated image";
                 dialog.Filter = "IL2 files (*.tga)|*.tga";
 
                 if (dialog.ShowDialog() == true)
                 {
                     Mouse.OverrideCursor = Cursors.Wait;
-
-                    IL2Mapping map = new IL2Mapping();
-                    IL2Colour[] newPixels = new IL2Colour[settings.ImageWidth * settings.ImageHeight];
-
-                    for (int i = 0; i < settings.ImageHeight * settings.ImageWidth; i++)
-                    {
-                        newPixels[i] = map.GetColour(Pixels[i]);
-                    }
-
-                    TGAWriter.Save(newPixels, settings.ImageWidth, settings.ImageHeight, dialog.FileName);
-
+                    core.IL2Save(dialog.FileName);
                     Mouse.OverrideCursor = null;
                 }
             }
@@ -654,18 +336,17 @@ namespace MapMaker
         /// <param name="e"></param>
         private void GenerateMapFromData(object sender, RoutedEventArgs e)
         {
-            ThreadStart childref = new ThreadStart(BuildAll);
-            Thread childThread = new Thread(childref);
-            childThread.IsBackground = true;
-            childThread.Start();
+            core.GenerateMapFromData();
         }
 
         /// <summary>
         /// Canvas display handler
         /// </summary>
         /// <param name="state"></param>
-        public void UpdateMainDisplay(int state)
+        public void UpdateMainDisplayImpl(int state)
         {
+            var settings = core.settings;
+
             MainDisplay.Children.Clear();
 
             switch (state)
@@ -722,9 +403,9 @@ namespace MapMaker
 
                         int y = 50;
                         int x = 20;
-                        lock (RequiredFiles)
+                        lock (core.RequiredFiles)
                         {
-                            foreach (String s in RequiredFiles)
+                            foreach (String s in core.RequiredFiles)
                             {
                                 title = new Label();
                                 title.Content = s;
@@ -747,7 +428,7 @@ namespace MapMaker
                         }
                         y += 30;
                         title = new Label();
-                        title.Content = downloadstatus;
+                        title.Content = core.downloadstatus;
                         title.Foreground = Brushes.White;
                         title.FontSize = 18;
                         title.FontWeight = FontWeights.Normal;
@@ -758,7 +439,7 @@ namespace MapMaker
 
                         y += 30;
                         title = new Label();
-                        title.Content = download_task;
+                        title.Content = core.download_task;
                         title.Foreground = Brushes.White;
                         title.FontSize = 18;
                         title.FontWeight = FontWeights.Normal;
@@ -801,7 +482,7 @@ namespace MapMaker
                         Canvas.SetLeft(title, 20);
 
                         title = new Label();
-                        title.Content = downloadstatus;
+                        title.Content = core.downloadstatus;
                         title.Foreground = Brushes.White;
                         title.FontSize = 18;
                         title.FontWeight = FontWeights.Normal;
@@ -819,24 +500,24 @@ namespace MapMaker
                         if (bitmap == null)
                         {
                             bitmap = new WriteableBitmap(settings.ImageWidth, settings.ImageHeight, 96, 96, PixelFormats.Gray16, null);
-                            bitmap.WritePixels(new Int32Rect(0, 0, settings.ImageWidth, settings.ImageHeight), Pixels, settings.ImageWidth * 2, 0);
+                            bitmap.WritePixels(new Int32Rect(0, 0, settings.ImageWidth, settings.ImageHeight), core.Pixels, settings.ImageWidth * 2, 0);
 
                             short minValue = 32767;
                             short maxValue = -32767;
                             int length = settings.ImageHeight * settings.ImageWidth;
                             for (int i = 0; i < length; i++)
                             {
-                                if (Pixels[i] < minValue)
-                                    minValue = Pixels[i];
-                                if (Pixels[i] > maxValue)
-                                    maxValue = Pixels[i];
+                                if (core.Pixels[i] < minValue)
+                                    minValue = core.Pixels[i];
+                                if (core.Pixels[i] > maxValue)
+                                    maxValue = core.Pixels[i];
                             }
 
                             float[] scaled_pixels = new float[length];
 
                             for (int i = 0; i < length; i++)
                             {
-                                scaled_pixels[i] = ((float)Pixels[i] - (float)minValue) / (float)(maxValue - minValue);
+                                scaled_pixels[i] = ((float)core.Pixels[i] - (float)minValue) / (float)(maxValue - minValue);
 
                             }
 
@@ -883,131 +564,6 @@ namespace MapMaker
             }
         }
 
-        /// <summary>
-        /// Load in all the SRTM files to create a virtual map
-        /// </summary>
-        private void BuildVirtualMap()
-        {
-            int start_lat = (int)Math.Floor(settings.StartLatitude);
-            int end_lat = (int)(settings.StartLatitude + ((settings.ImageHeight * settings.PixelWidthInMetres) / 111320.0) + 0.5);
-            int start_lon = (int)Math.Floor(settings.StartLongitude);
-
-            double width_in_metres = settings.PixelWidthInMetres * settings.ImageWidth;
-
-            double met = SRTM.GetMetresPerDegreeLongitude(start_lat);
-            int width1 = (int)(width_in_metres / met);
-
-            met = SRTM.GetMetresPerDegreeLongitude(end_lat);
-            int width2 = (int)(width_in_metres / met);
-
-            width1 = Math.Max(width1, width2);
-
-            int LonWidth = width1 + 2;
-            double height_in_metres = settings.PixelWidthInMetres * settings.ImageHeight;
-            int LatHeight = (int)(height_in_metres / 111320.0) + 1;
-
-            Map = new SRTM[LonWidth, LatHeight];
-
-            for (int i = 0; i < LatHeight; i++)
-            {
-                for (int j = 0; j < LonWidth; j++)
-                {
-                    Map[j, i] = new SRTM(start_lat - i, start_lon + j, SRTMdirectory);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Actually build the gray scale image
-        /// </summary>
-        private void BuildImage()
-        {
-            MainWindow parent = MainWindow.Instance;
-            MercatorProjection mp = new MercatorProjection(settings.StartLatitude, settings.StartLongitude);
-            Pixels = new short[settings.ImageWidth * settings.ImageHeight];
-
-
-            int pos = 0;
-            for (int y = 0; y < settings.ImageHeight; y++)
-            {
-                parent.downloadstatus = String.Format("Line {0}", y);
-                parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(3)));
-                double nl = mp.GetNewLatitude(settings.StartLatitude, y * settings.PixelWidthInMetres);
-                Delta d = mp.GetDelta(nl, settings.StartLongitude);
-                for (int x = 0; x < settings.ImageWidth; x++)
-                {
-                    Pixels[pos + x] = Map[d.mx, d.my].GetHeight(d, settings.PixelWidthInMetres);
-                    d = mp.Step(d, settings.PixelWidthInMetres);
-                }
-                //Parallel.For(0, settings.ImageWidth,
-                //   index => 
-                //   {
-                //       Pixels[pos + index] = Map[d.mx, d.my].GetHeight(d,settings.PixelWidthInMetres);
-                //       d = mp.Step(d, settings.PixelWidthInMetres);
-                //
-                //   }
-                //       );
-                pos += settings.ImageWidth;
-            }
-
-
-        }
-
-        /// <summary>
-        /// Work out the needed SRTM files and download them
-        /// </summary>
-        private void GetSRTMFiles()
-        {
-            int start_lat = (int)Math.Floor(settings.StartLatitude);
-            int start_lon = (int)Math.Floor(settings.StartLongitude);
-            double met = SRTM.GetMetresPerDegreeLongitude(start_lat);
-            double width_in_metres = settings.PixelWidthInMetres * settings.ImageWidth;
-            int LonWidth = (int)(width_in_metres / met) + 2;
-            double height_in_metres = settings.PixelWidthInMetres * settings.ImageHeight;
-            int LatHeight = (int)(height_in_metres / 111320.0) + 1;
-
-
-            for (int i = 0; i < LatHeight; i++)
-            {
-                for (int j = 0; j < LonWidth; j++)
-                {
-                    RequiredFiles.Add(SRTM.GetFileName(start_lat - i, start_lon + j));
-                }
-            }
-            UpdateMainDisplay(1);
-
-            // Remove any files we already have
-            downloadstatus = "Removing existing files";
-            for (int i = RequiredFiles.Count - 1; i >= 0; i--)
-            {
-                String fn = System.IO.Path.Combine(SRTMdirectory, RequiredFiles[i]);
-                fn += ".hgt";
-                if (File.Exists(fn))
-                {
-                    RequiredFiles.RemoveAt(i);
-                    UpdateMainDisplay(1);
-
-                }
-            }
-
-            downloadstatus = "Downloading files";
-            UpdateMainDisplay(1);
-
-            ThreadStart childref = new ThreadStart(DownloadFiles);
-            Thread childThread = new Thread(childref);
-            childThread.IsBackground = true;
-            childThread.Start();
-        }
-
-        public static void BuildAll()
-        {
-            MainWindow parent = MainWindow.Instance;
-            parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(2)));
-            parent.BuildVirtualMap();
-            parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(3)));
-            parent.BuildImage();
-            parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(4)));
-        }
 
         /// <summary>
         /// Draw any overlay files into the map_t image
@@ -1020,6 +576,8 @@ namespace MapMaker
             if (typeoverlay == null)
                 return;
 
+            var settings = core.settings;
+
             #region Create a bounding region in latitude and longitude
             MercatorProjection mp = new MercatorProjection(settings.StartLatitude, settings.StartLongitude);
             Region r = mp.GetRegion(settings.ImageWidth, settings.ImageHeight, (int)settings.PixelWidthInMetres);           
@@ -1027,259 +585,23 @@ namespace MapMaker
 
             foreach (ShapeFile s in Overlays)
             {
-                s.Draw(map_t, 32, r, mp, (int)settings.PixelWidthInMetres, settings.ImageWidth, settings.ImageHeight);
+                s.Draw(core.map_t, 32, r, mp, (int)settings.PixelWidthInMetres, settings.ImageWidth, settings.ImageHeight);
             }
             UInt32[] types = new UInt32[settings.ImageHeight * settings.ImageWidth];
 
             for (int i = 0; i < settings.ImageHeight * settings.ImageWidth; i++)
             {
-                byte baset = map_t[i];
+                byte baset = core.map_t[i];
                 if ((baset & 32) == 0)
-                    types[i] = ColourMappingForMapT[map_t[i]];
+                    types[i] = core.ColourMappingForMapT[core.map_t[i]];
                 else
                     types[i] = 0xffff0000;
             }
 
             typeoverlay.WritePixels(new Int32Rect(0, 0, settings.ImageWidth, settings.ImageHeight), types, settings.ImageWidth * 4, 0);
-            UpdateMainDisplay(5);
+            core.UpdateMainDisplay(5);
         }
 
-        #region Thread handlers
-
-        /// <summary>
-        /// Thread based file downloader, plus does all the other work
-        /// </summary>
-        /// 
-        public static void DownloadFiles()
-        {
-            string SRTMLocation = "https://dds.cr.usgs.gov/srtm/version2_1/SRTM3/";
-            MainWindow parent = MainWindow.Instance;
-            int i = parent.RequiredFiles.Count - 1;
-            while (i >= 0)
-            {
-                bool missing = false;
-                String file = parent.SRTMdirectory + @"\" + parent.RequiredFiles[i] + ".zip";
-                parent.download_task = "Downloading " + file;
-                parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(1)));
-
-                if (!File.Exists(file))
-                {
-                    String url = SRTMLocation + "/Africa/" + parent.RequiredFiles[i] + ".zip";
-                    if (DoesFileExist(url))
-                    {
-                        DownloadFile(url, file);
-                    }
-                    else
-                    {
-                        url = SRTMLocation + "/Australia/" + parent.RequiredFiles[i] + ".zip";
-                        if (DoesFileExist(url))
-                        {
-                            DownloadFile(url, file);
-                        }
-                        else
-                        {
-                            url = SRTMLocation + "/Eurasia/" + parent.RequiredFiles[i] + ".zip";
-                            if (DoesFileExist(url))
-                            {
-                                DownloadFile(url, file);
-                            }
-                            else
-                            {
-                                url = SRTMLocation + "/Islands/" + parent.RequiredFiles[i] + ".zip";
-                                if (DoesFileExist(url))
-                                {
-                                    DownloadFile(url, file);
-                                }
-                                else
-                                {
-                                    url = SRTMLocation + "/North_America/" + parent.RequiredFiles[i] + ".zip";
-                                    if (DoesFileExist(url))
-                                    {
-                                        DownloadFile(url, file);
-                                    }
-                                    else
-                                    {
-                                        url = SRTMLocation + "/South_America/" + parent.RequiredFiles[i] + ".zip";
-                                        if (DoesFileExist(url))
-                                        {
-                                            DownloadFile(url, file);
-
-                                        }
-                                        else
-                                        {
-                                            missing = true;
-
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                if (missing)
-                {
-
-                }
-                else
-                {
-                    lock (parent.RequiredFiles)
-                    {
-                        parent.RequiredFiles.RemoveAt(i);
-                        parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(1)));
-                    }
-                    Thread.Sleep(50);
-                }
-                i--;
-            }
-            parent.download_task = "Extracting files";
-            parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(1)));
-
-            foreach (String s in parent.ziplist)
-            {
-                try
-                {
-                    System.IO.Compression.ZipFile.ExtractToDirectory(s, parent.SRTMdirectory);
-                }
-                catch (Exception) { }
-
-            }
-            parent.download_task = "Loading SRTM files";
-            parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(1)));
-            parent.ziplist.Clear();
-
-            parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(2)));
-            parent.BuildVirtualMap();
-            parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(3)));
-            parent.BuildImage();
-            parent.Dispatcher.BeginInvoke((Action)(() => parent.UpdateMainDisplay(4)));
-            parent.FilesDownloaded = true;
-        }
-
-        /// <summary>
-        /// Check the file exists on the server
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        public static bool DoesFileExist(String url)
-        {
-            ServicePointManager.Expect100Continue = true;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            System.Net.HttpWebRequest request = null;
-            System.Net.HttpWebResponse response = null;
-            request = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create(url);
-            request.Method = "HEAD";
-            request.Timeout = 30000;
-            try
-            {
-                response = (System.Net.HttpWebResponse)request.GetResponse();
-                HttpStatusCode status = response.StatusCode;
-                return (status != HttpStatusCode.NotFound);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
-
-        }
-
-        public static void DownloadFile(string url, string file)
-        {
-            if (File.Exists(file))
-                return;
-
-            bool done = false;
-            while (!done)
-            {
-                MainWindow parent = MainWindow.Instance;
-                {
-                    try
-                    {
-                        parent.wc.DownloadFile(new System.Uri(url), file);
-                        done = true;
-
-                        lock (parent.ziplist)
-                        {
-                            parent.ziplist.Add(file);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        if (e.Message == "The operation has timed out")
-                        {
-                            done = false;
-                        }
-                        else
-                        {
-                            done = true;
-                        }
-                    }
-                }
-            }
-        }
-
-        #endregion
-
-        #region Data tables
-        LandTypeRecord[] LandTypes = new LandTypeRecord[]
-        {
-            new LandTypeRecord(24, 24, 128, "water"),
-            new LandTypeRecord(50, 205, 49, "jungle"),
-            new LandTypeRecord(33, 138, 33, "forest"),
-            new LandTypeRecord(255, 255, 249, "snow"),
-            new LandTypeRecord(189, 189, 189, "desert"),
-            new LandTypeRecord(245, 222, 180, "dryscrub"),
-            new LandTypeRecord(254, 0, 0, "city"),
-            new LandTypeRecord(249, 237, 115, "grassland"),
-            new LandTypeRecord(144, 187, 142, "hill"),
-            new LandTypeRecord(240, 183, 104, "farmland"),
-            new LandTypeRecord(255, 214, 0, "tropical savana"),
-            new LandTypeRecord(70, 131, 178, "lake"),
-            new LandTypeRecord(255, 214, 0, "swamp"),
-            new LandTypeRecord(154, 205, 50, "steppe"),
-            new LandTypeRecord(153, 249, 151, "mixed scrub"),
-            new LandTypeRecord(218, 235, 157, "desert scrub"),
-            new LandTypeRecord(151, 147, 84, "mountain"),
-            new LandTypeRecord(188, 142, 144, "sand scrub")
-
-        };
-
-        UInt32[] ColourMappingForMapT = new UInt32[]
-        {
-                0x80a0ff00,     // 0    Lowland near water
-                0x80ffff00,     // 1    Desert
-                0x8080ff00,     // 2    Dry scrub
-                0x8000ff00,     // 3    Grass
-                0x80008000,     // 4    Hill
-                0x8000a000,     // 5    Farmland
-                0x8080ff00,     // 6    Tropical savannah
-                0x80009080,     // 7    Swamp
-                0x80ffffff,     // 8    Snow
-                0x80808080,     // 9    Mountain
-                0x00000000,     // 10
-                0x00000000,     // 11
-                0x8040a000,     // 12   Steppe
-                0x8040ff40,     // 13   Mixed scrub
-                0x80808000,     // 14   Desert scrub
-                0x80a0a000,     // 15   Sand scrub
-                0x80404040,     // 16   City
-                0x00000000,     // 17
-                0x00000000,     // 18
-                0x00000000,     // 19
-                0x00000000,     // 20
-                0x00000000,     // 21
-                0x00000000,     // 22
-                0x00000000,     // 23
-                0x8080a020,     // 24   Forest
-                0x00000000,     // 25
-                0x00000000,     // 26
-                0x8060ff40,     // 27   Jungle
-                0x800020ff,     // 28   Sea
-                0x800060ff,     // 29   Water in land 
-                0x800080ff,     // 30   Lake
-                0x00000000      // 31
-
-        };
-        #endregion
     }
+
 }
