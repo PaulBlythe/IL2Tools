@@ -8,18 +8,15 @@ namespace MapMaker
 {
     public class ProjectSettings
     {
-        public double StartLatitude;
-        public double StartLongitude;
-        public double PixelWidthInMetres;
-        public bool UseMercatorProjection;
-        public int ImageWidth;
-        public int ImageHeight;
+        public double StartLatitude = 0;
+        public double StartLongitude = 0;
+        public double PixelWidthInMetres = 200;
+        public bool UseMercatorProjection = true;
+        public int ImageWidth = 1024;
+        public int ImageHeight = 1024;
 
         public ProjectSettings()
         {
-            ImageHeight = ImageWidth = 0;
-            StartLongitude = StartLatitude = PixelWidthInMetres = 0;
-            UseMercatorProjection = true;
         }
 
         public void Save(BinaryWriter b)
