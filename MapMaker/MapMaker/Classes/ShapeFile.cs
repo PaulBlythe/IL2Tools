@@ -25,6 +25,7 @@ namespace MapMaker
         double MaxM;
 
         List<SHPElement> Elements = new List<SHPElement>();
+        List<String> Types = new List<string>();
 
         public ShapeFile(String filename)
         {
@@ -76,22 +77,48 @@ namespace MapMaker
                     }
                 }
             }
+
+            String dbname = filename.Replace(".shp", ".csv");
+            if (File.Exists(dbname))
+            {
+                using (TextReader tr = File.OpenText(dbname))
+                {
+                    String line;        // skip header
+                    tr.ReadLine();
+                    while (true)
+                    {
+                        line = tr.ReadLine();
+                        if (line == null)
+                        {
+                            break;
+                        }
+                        string[] parts = line.Split(',');
+                        Types.Add(parts[1]);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < Elements.Count; i++)
+                    Types.Add("Road");
+            }
         }
 
         public void Draw(byte[] target, byte type, Region r, MapProjection mp, int scale, int width, int height)
         {
+            int el = 0;
             foreach (SHPElement e in Elements)
             {
-                if (e is SHPPolyLine)
+                if ((e is SHPPolyLine) && (Types[el] == "Road"))
                 {
                     SHPPolyLine sp = (SHPPolyLine)e;
                     if (sp.region.Intersects(r))
                     {
-                        for (int i=0; i<sp.NumParts; i++)
+                        for (int i = 0; i < sp.NumParts; i++)
                         {
                             int s1 = sp.Parts[i];
                             int s2;
-                            if ((i+1) == sp.NumParts)
+                            if ((i + 1) == sp.NumParts)
                             {
                                 s2 = sp.NumPoints - 1;
                             }
@@ -115,6 +142,7 @@ namespace MapMaker
                         }
                     }
                 }
+                el++;
             }
         }
 
@@ -134,7 +162,7 @@ namespace MapMaker
 
         private void putpixel(byte[] map, int x1, int y1, byte col, int width, int height)
         {
-            if ((x1>=0)&&(y1>=0)&&(x1<width)&&(y1<height))
+            if ((x1 >= 0) && (y1 >= 0) && (x1 < width) && (y1 < height))
             {
                 int pos = (y1 * width) + x1;
                 map[pos] |= col;
@@ -143,7 +171,7 @@ namespace MapMaker
 
         private void DrawLine(byte[] map, int x1, int y1, int x2, int y2, int width, int height, byte col)
         {
-            if (y1>y2)
+            if (y1 > y2)
             {
                 int temp = x1;
                 x1 = x2;
@@ -160,7 +188,7 @@ namespace MapMaker
                 ix = -1;
 
             delta_x = Math.Abs(delta_x) << 1;
- 
+
             int delta_y = (y2 - y1);
             int iy = 1;
             delta_y = Math.Abs(delta_y) << 1;
@@ -170,11 +198,11 @@ namespace MapMaker
             if (delta_x >= delta_y)
             {
                 int error = (delta_y - (delta_x >> 1));
- 
+
                 while (x1 != x2)
                 {
                     // reduce error, while taking into account the corner case of error == 0
-                    if ((error > 0) || ((error==0) && (ix > 0)))
+                    if ((error > 0) || ((error == 0) && (ix > 0)))
                     {
                         error -= delta_x;
                         y1 += iy;
@@ -191,17 +219,17 @@ namespace MapMaker
             {
                 // error may go below zero
                 int error = (delta_x - (delta_y >> 1));
- 
+
                 while (y1 != y2)
                 {
                     // reduce error, while taking into account the corner case of error == 0
-                    if ((error > 0) || ((error==0) && (iy > 0)))
+                    if ((error > 0) || ((error == 0) && (iy > 0)))
                     {
                         error -= delta_y;
                         x1 += ix;
                     }
                     // else do nothing
- 
+
                     error += delta_x;
                     y1 += iy;
 
