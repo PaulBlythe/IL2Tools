@@ -190,7 +190,8 @@ namespace MapMaker
                     }
                 }
             }
-            h /= count;
+            if (count != 0)
+              h /= count;
 
             return (short)h;
 
