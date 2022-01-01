@@ -1,0 +1,648 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8A240AA3-B44C-41DA-8A3E-E3F41CE88040}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IL2Modder</RootNamespace>
+    <AssemblyName>IL2Modder</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ProductName>IL2 Modder</ProductName>
+    <PublisherName>Stainless</PublisherName>
+    <SuiteName>IL2 mod tools</SuiteName>
+    <ApplicationRevision>39</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>AEA14E7ABA57CAE23A39651D47D351373A4C9569</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>IL2Modder_1_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FbxSDK">
+      <HintPath>..\..\IL2Modder _Reach\IL2Modder\FbxSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit">
+      <HintPath>..\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="MeshDecimator">
+      <HintPath>..\MeshDecimator.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Content.Pipeline, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AC3D\AC3D.cs" />
+    <Compile Include="AC3D\SGI_RGB.cs" />
+    <Compile Include="AdjustMatrix.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdjustMatrix.Designer.cs">
+      <DependentUpon>AdjustMatrix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AnimationForms\AAGunParameters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnimationForms\AAGunParameters.Designer.cs" />
+    <Compile Include="AnimationForms\FieldGunAnimation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnimationForms\FieldGunAnimation.Designer.cs" />
+    <Compile Include="AnimationForms\ShipGunParameters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnimationForms\ShipGunParameters.Designer.cs" />
+    <Compile Include="AnimationForms\ShipTurretHeadParameters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnimationForms\ShipTurretHeadParameters.Designer.cs" />
+    <Compile Include="AOBuilder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AOBuilder.Designer.cs">
+      <DependentUpon>AOBuilder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ButtonBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ButtonBar.Designer.cs">
+      <DependentUpon>ButtonBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Camera.cs" />
+    <Compile Include="CockpitScript.cs" />
+    <Compile Include="CockpitVariableMapping.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CockpitVariableMapping.Designer.cs" />
+    <Compile Include="ContentBuilder.cs" />
+    <Compile Include="CVTAnimation.cs" />
+    <Compile Include="DataDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataDisplay.Designer.cs">
+      <DependentUpon>DataDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorLogger.cs" />
+    <Compile Include="FlipNormals.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FlipNormals.Designer.cs">
+      <DependentUpon>FlipNormals.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddCollisionMesh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddCollisionMesh.Designer.cs">
+      <DependentUpon>AddCollisionMesh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CVTAnimatorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CVTAnimatorDialog.Designer.cs">
+      <DependentUpon>CVTAnimatorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FaceGroupSplitter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FaceGroupSplitter.Designer.cs">
+      <DependentUpon>FaceGroupSplitter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SmoothedAngleAnimatorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SmoothedAngleAnimatorDialog.Designer.cs">
+      <DependentUpon>SmoothedAngleAnimatorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TranslateAnimatorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TranslateAnimatorDialog.Designer.cs">
+      <DependentUpon>TranslateAnimatorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fox1Animators\AAGunAnimation.cs" />
+    <Compile Include="Fox1Animators\Animator.cs" />
+    <Compile Include="Fox1Animators\FieldGunAnimator.cs" />
+    <Compile Include="Fox1Animators\ShipsGunAnimation.cs" />
+    <Compile Include="Fox1Animators\ShipTurretHeadAnimation.cs" />
+    <Compile Include="Fox1ExportDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fox1ExportDialog.Designer.cs">
+      <DependentUpon>Fox1ExportDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FoxOneAnimationEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FoxOneAnimationEditor.Designer.cs" />
+    <Compile Include="GenerateSkinTexture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenerateSkinTexture.Designer.cs">
+      <DependentUpon>GenerateSkinTexture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GraphicsDeviceControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GraphicsDeviceService.cs" />
+    <Compile Include="HIMErrorHandler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HIMErrorHandler.Designer.cs" />
+    <Compile Include="HookEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HookEdit.Designer.cs">
+      <DependentUpon>HookEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IL2\Aircraft.cs" />
+    <Compile Include="IL2\AircraftInterface.cs" />
+    <Compile Include="IL2\AnglesFork.cs" />
+    <Compile Include="IL2\Atmosphere.cs" />
+    <Compile Include="IL2\BinaryMesh.cs" />
+    <Compile Include="IL2\CockpitInterface.cs" />
+    <Compile Include="IL2\CollisionMesh.cs" />
+    <Compile Include="IL2\CollisionNode.cs" />
+    <Compile Include="IL2\FaceGroup.cs" />
+    <Compile Include="IL2\FlightVariables.cs" />
+    <Compile Include="IL2\heirMesh.cs" />
+    <Compile Include="IL2\HIM.cs" />
+    <Compile Include="IL2\Hook.cs" />
+    <Compile Include="IL2\Lod.cs" />
+    <Compile Include="IL2\Material.cs" />
+    <Compile Include="IL2\Mesh.cs" />
+    <Compile Include="IL2\MeshNode.cs" />
+    <Compile Include="IL2\Node.cs" />
+    <Compile Include="IL2\Pitot.cs" />
+    <Compile Include="IL2\RootNode.cs" />
+    <Compile Include="IL2\Tuple2d.cs" />
+    <Compile Include="IL2\Tuple2f.cs" />
+    <Compile Include="IL2\Tuple3D.cs" />
+    <Compile Include="IL2\Tuple3f.cs" />
+    <Compile Include="IL2\WeaponLoadout.cs" />
+    <Compile Include="IL2\WeaponLoadoutArray.cs" />
+    <Compile Include="IL2\World.cs" />
+    <Compile Include="Joystick.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Joystick.Designer.cs">
+      <DependentUpon>Joystick.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lighting\DirectionalLight.cs" />
+    <Compile Include="Lighting\LightingManager.cs" />
+    <Compile Include="Lighting\PointLight.cs" />
+    <Compile Include="Lighting\SpotLight.cs" />
+    <Compile Include="LineDrawer.cs" />
+    <Compile Include="Loading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loading.Designer.cs">
+      <DependentUpon>Loading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MaterialEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MaterialEditor.Designer.cs">
+      <DependentUpon>MaterialEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MeshScanner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MeshScanner.Designer.cs">
+      <DependentUpon>MeshScanner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MissingTexture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MissingTexture.Designer.cs">
+      <DependentUpon>MissingTexture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MissingTextures.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MissingTextures.Designer.cs">
+      <DependentUpon>MissingTextures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MSHLoaderErrorHandler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MSHLoaderErrorHandler.Designer.cs" />
+    <Compile Include="NameEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NameEntry.Designer.cs">
+      <DependentUpon>NameEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NormalMapping.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NormalMapping.Designer.cs">
+      <DependentUpon>NormalMapping.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Ocean.cs" />
+    <Compile Include="Particles\ParticleSettings.cs" />
+    <Compile Include="Particles\ParticleSystem.cs" />
+    <Compile Include="Particles\ParticleVertex.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Project.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Research.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Research.Designer.cs">
+      <DependentUpon>Research.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SaveFBX.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SaveFBX.Designer.cs" />
+    <Compile Include="Script.cs" />
+    <Compile Include="ScriptGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScriptGenerator.Designer.cs">
+      <DependentUpon>ScriptGenerator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceContainer.cs" />
+    <Compile Include="ShadowMap.cs" />
+    <Compile Include="SkyBox.cs" />
+    <Compile Include="SmoothedAngleAnimator.cs" />
+    <Compile Include="TestTga.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestTga.Designer.cs">
+      <DependentUpon>TestTga.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TextureBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextureBrowser.Designer.cs">
+      <DependentUpon>TextureBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TextureManager.cs" />
+    <Compile Include="Tga.cs" />
+    <Compile Include="ThreeDSFile.cs" />
+    <Compile Include="Tools\StringTokenizer.cs" />
+    <Compile Include="TranslateAnimator.cs" />
+    <Compile Include="Triangle.cs" />
+    <Compile Include="TurretLimits.cs" />
+    <Compile Include="WeaponLoadList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WeaponLoadList.Designer.cs">
+      <DependentUpon>WeaponLoadList.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AdjustMatrix.resx">
+      <DependentUpon>AdjustMatrix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnimationForms\AAGunParameters.resx" />
+    <EmbeddedResource Include="AnimationForms\FieldGunAnimation.resx" />
+    <EmbeddedResource Include="AnimationForms\ShipGunParameters.resx" />
+    <EmbeddedResource Include="AnimationForms\ShipTurretHeadParameters.resx" />
+    <EmbeddedResource Include="AOBuilder.resx">
+      <DependentUpon>AOBuilder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ButtonBar.resx">
+      <DependentUpon>ButtonBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CockpitVariableMapping.resx" />
+    <EmbeddedResource Include="DataDisplay.resx">
+      <DependentUpon>DataDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FlipNormals.resx">
+      <DependentUpon>FlipNormals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddCollisionMesh.resx">
+      <DependentUpon>AddCollisionMesh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CVTAnimatorDialog.resx">
+      <DependentUpon>CVTAnimatorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FaceGroupSplitter.resx">
+      <DependentUpon>FaceGroupSplitter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SmoothedAngleAnimatorDialog.resx">
+      <DependentUpon>SmoothedAngleAnimatorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TranslateAnimatorDialog.resx">
+      <DependentUpon>TranslateAnimatorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fox1ExportDialog.resx">
+      <DependentUpon>Fox1ExportDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FoxOneAnimationEditor.resx" />
+    <EmbeddedResource Include="GenerateSkinTexture.resx">
+      <DependentUpon>GenerateSkinTexture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HIMErrorHandler.resx" />
+    <EmbeddedResource Include="HookEdit.resx">
+      <DependentUpon>HookEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Joystick.resx">
+      <DependentUpon>Joystick.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Loading.resx">
+      <DependentUpon>Loading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MaterialEditor.resx">
+      <DependentUpon>MaterialEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MeshScanner.resx">
+      <DependentUpon>MeshScanner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MissingTexture.resx">
+      <DependentUpon>MissingTexture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MissingTextures.resx">
+      <DependentUpon>MissingTextures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MSHLoaderErrorHandler.resx" />
+    <EmbeddedResource Include="NameEntry.resx">
+      <DependentUpon>NameEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NormalMapping.resx">
+      <DependentUpon>NormalMapping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Research.resx">
+      <DependentUpon>Research.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SaveFBX.resx" />
+    <EmbeddedResource Include="ScriptGenerator.resx">
+      <DependentUpon>ScriptGenerator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestTga.resx">
+      <DependentUpon>TestTga.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextureBrowser.resx">
+      <DependentUpon>TextureBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WeaponLoadList.resx">
+      <DependentUpon>WeaponLoadList.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <Content Include="CompiledAssets\32bomb-model_0.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Bomb.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\bomb100.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\cartridge.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\CubeEffect.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Effect.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\FieldTexture.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Fire.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\GlassEffect.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Lambert.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Model.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Particle.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\rocket.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\ShadowMap.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\shoot.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\skin2_0.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\skin3_0.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\skin_0.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Smoke.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\tank.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Texture3D.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Sunset.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Grass.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Big.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\cube.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\night.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\PointLights.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\glow.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Albedo.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Ocean1_N.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Ocean2_N.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Ocean3_N.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Ocean4_N.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\OceanShader.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\SmokeGlow.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\GroundDust.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Glass.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CompiledAssets\Bump.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="CompiledAssets\MeshPartShader.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="IL2Modder_1_TemporaryKey.pfx" />
+    <None Include="IL2Modder_TemporaryKey.pfx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ChangeList.txt" />
+    <Content Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Xna.Framework.4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft XNA Framework Redistributable 4.0</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MeshReduction\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

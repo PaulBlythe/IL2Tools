@@ -1,0 +1,263 @@
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\IL2Modder.exe.config
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.AdjustMatrix.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.AOBuilder.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.ButtonBar.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.DataDisplay.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.FlipNormals.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Form1.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.GenerateSkinTexture.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.HookEdit.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Joystick.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Loading.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.MaterialEditor.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.MeshScanner.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.MissingTexture.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.MissingTextures.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.NameEntry.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Properties.Resources.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Research.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.ScriptGenerator.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.TestTga.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.TextureBrowser.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.WeaponLoadList.resources
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.csproj.GenerateResource.Cache
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\32bomb-model_0.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Bomb.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\bomb100.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\cartridge.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\CubeEffect.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Effect.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\FieldTexture.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Fire.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\GlassEffect.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Lambert.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Model.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Particle.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\rocket.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\ShadowMap.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\shoot.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\skin2_0.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\skin3_0.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\skin_0.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Smoke.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\tank.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Texture3D.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Sunset.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Grass.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Big.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\cube.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\night.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\PointLights.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\glow.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Albedo.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Ocean1_N.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Ocean2_N.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Ocean3_N.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Ocean4_N.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\OceanShader.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\SmokeGlow.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\ICSharpCode.AvalonEdit.dll
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\Microsoft.Xna.Framework.Content.Pipeline.dll
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\Microsoft.Xna.Framework.dll
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\Microsoft.Xna.Framework.Graphics.dll
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\Microsoft.Xna.Framework.xml
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\Microsoft.Xna.Framework.Content.Pipeline.xml
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\Microsoft.Xna.Framework.Graphics.xml
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.csprojResolveAssemblyReference.cache
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.exe.manifest
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.application
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.exe
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.pdb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\GroundDust.xnb
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\IL2Modder.exe.manifest
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\IL2Modder.application
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\IL2Modder.exe
+C:\Users\paul.blythe\Documents\Visual Studio 2010\Projects\IL2Modder\IL2Modder\bin\Debug\IL2Modder.pdb
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.AdjustMatrix.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.AOBuilder.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.ButtonBar.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.DataDisplay.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.FlipNormals.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Form1.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.GenerateSkinTexture.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.HookEdit.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Joystick.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Loading.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.MaterialEditor.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.MeshScanner.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.MissingTexture.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.MissingTextures.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.NameEntry.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Properties.Resources.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Research.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.ScriptGenerator.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.TestTga.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.TextureBrowser.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.WeaponLoadList.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.csproj.GenerateResource.Cache
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.exe
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.pdb
+E:\IL2Modder\IL2Modder\bin\Debug\IL2Modder.exe.config
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\32bomb-model_0.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Bomb.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\bomb100.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\cartridge.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\CubeEffect.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Effect.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\FieldTexture.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Fire.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\GlassEffect.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Lambert.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Model.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Particle.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\rocket.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\ShadowMap.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\shoot.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\skin2_0.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\skin3_0.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\skin_0.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Smoke.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\tank.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Texture3D.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Sunset.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Grass.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Big.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\cube.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\night.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\PointLights.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\glow.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Albedo.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Ocean1_N.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Ocean2_N.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Ocean3_N.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Ocean4_N.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\OceanShader.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\SmokeGlow.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\GroundDust.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\IL2Modder.exe.manifest
+E:\IL2Modder\IL2Modder\bin\Debug\IL2Modder.application
+E:\IL2Modder\IL2Modder\bin\Debug\IL2Modder.exe
+E:\IL2Modder\IL2Modder\bin\Debug\IL2Modder.pdb
+E:\IL2Modder\IL2Modder\bin\Debug\ICSharpCode.AvalonEdit.dll
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.exe.manifest
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.application
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.NormalMapping.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.SaveFBX.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.HIMErrorHandler.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.FoxOneAnimationEditor.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.AnimationForms.AAGunParameters.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.AnimationForms.FieldGunAnimation.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.AnimationForms.ShipGunParameters.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.AnimationForms.ShipTurretHeadParameters.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.MSHLoaderErrorHandler.resources
+E:\IL2Modder\IL2Modder\bin\Debug\FbxSDK.dll
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.CockpitVariableMapping.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Fox1ExportDialog.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Forms.CVTAnimatorDialog.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Forms.TranslateAnimatorDialog.resources
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Forms.SmoothedAngleAnimatorDialog.resources
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\MeshPartShader.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Glass.xnb
+E:\IL2Modder\IL2Modder\bin\Debug\MeshDecimator.dll
+E:\IL2Modder\IL2Modder\bin\Debug\MeshDecimator.pdb
+E:\IL2Modder\IL2Modder\bin\Debug\MeshDecimator.xml
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Forms.AddCollisionMesh.resources
+E:\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Bump.xnb
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.csprojAssemblyReference.cache
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.csproj.CoreCompileInputs.cache
+E:\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.csproj.CopyComplete
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\32bomb-model_0.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Bomb.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\bomb100.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\cartridge.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\CubeEffect.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Effect.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\FieldTexture.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Fire.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\GlassEffect.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Lambert.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Model.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Particle.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\rocket.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\ShadowMap.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\shoot.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\skin2_0.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\skin3_0.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\skin_0.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Smoke.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\tank.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Texture3D.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Sunset.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Grass.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Big.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\cube.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\night.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\PointLights.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\glow.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Albedo.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Ocean1_N.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Ocean2_N.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Ocean3_N.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Ocean4_N.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\OceanShader.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\SmokeGlow.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Glass.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\Bump.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\MeshPartShader.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\CompiledAssets\GroundDust.xnb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\IL2Modder.exe.config
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\IL2Modder.exe.manifest
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\IL2Modder.application
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\IL2Modder.exe
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\IL2Modder.pdb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\ICSharpCode.AvalonEdit.dll
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\MeshDecimator.dll
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\Microsoft.Xna.Framework.dll
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\Microsoft.Xna.Framework.Graphics.dll
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\MeshDecimator.pdb
+C:\Projects\IL2Modder\IL2Modder\bin\Debug\MeshDecimator.xml
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.csprojAssemblyReference.cache
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.AdjustMatrix.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.AnimationForms.AAGunParameters.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.AnimationForms.FieldGunAnimation.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.AnimationForms.ShipGunParameters.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.AnimationForms.ShipTurretHeadParameters.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.AOBuilder.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.ButtonBar.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.CockpitVariableMapping.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.DataDisplay.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.FlipNormals.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Form1.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Forms.AddCollisionMesh.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Forms.CVTAnimatorDialog.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Forms.SmoothedAngleAnimatorDialog.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Forms.TranslateAnimatorDialog.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Fox1ExportDialog.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.FoxOneAnimationEditor.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.GenerateSkinTexture.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.HIMErrorHandler.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.HookEdit.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Joystick.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Loading.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.MaterialEditor.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.MeshScanner.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.MissingTexture.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.MissingTextures.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.MSHLoaderErrorHandler.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.NameEntry.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.NormalMapping.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Properties.Resources.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Research.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.SaveFBX.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.ScriptGenerator.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.TestTga.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.TextureBrowser.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.WeaponLoadList.resources
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.csproj.GenerateResource.cache
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.csproj.CoreCompileInputs.cache
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.exe.manifest
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.application
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.csproj.CopyComplete
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.exe
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.pdb
+C:\Projects\IL2Modder\IL2Modder\obj\x86\Debug\IL2Modder.Forms.FaceGroupSplitter.resources
