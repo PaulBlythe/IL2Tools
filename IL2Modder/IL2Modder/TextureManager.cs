@@ -328,6 +328,7 @@ namespace IL2Modder
             String type = Path.GetExtension(file);
             switch (type)
             {
+                case ".TGA":
                 case ".tga":
                 case ".tgb":
                     {

@@ -346,7 +346,6 @@ namespace IL2Modder
             }
         }
 
-
         public bool IsDesignerHosted2
         {
             get
@@ -2475,6 +2474,11 @@ namespace IL2Modder
         public void ExportCollisionMeshes(String dir)
         {
             mesh.ExportCollisionMeshes(dir);
+        }
+
+        public void ExportHooks(TextWriter t)
+        {
+            mesh.ExportHooks(t);
         }
 
         #endregion

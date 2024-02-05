@@ -385,6 +385,11 @@ namespace IL2Modder.IL2
             path += ".collision";
             mesh.ExportCollision(path);
         }
+
+        public void ExportHooks(TextWriter t)
+        {
+            mesh.SaveHooks(t);
+        }
         
         #endregion
 

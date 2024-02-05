@@ -2020,28 +2020,29 @@ namespace IL2Modder.IL2
 
         public void SaveAsUE5(string dir)
         {
+            Matrix world = Matrix.Identity;
             foreach (Node n in root.children)
             {
                 if (n is MeshNode)
                 {
                     MeshNode mn = (MeshNode)n;
-                    mn.mesh.SaveAsUE5(dir, Name);
+                    mn.mesh.SaveAsUE5(dir, Name, world);
                 }
-                SaveAsUE5(dir, n);
+                SaveAsUE5(dir, n, n.world);
             }
 
         }
 
-        public void SaveAsUE5(string dir, Node n2)
+        public void SaveAsUE5(string dir, Node n2, Matrix world)
         {
             foreach (Node n in n2.children)
             {
                 if (n is MeshNode)
                 {
                     MeshNode mn = (MeshNode)n;
-                    mn.mesh.SaveAsUE5(dir, Name);
+                    mn.mesh.SaveAsUE5(dir, Name, world);
                 }
-                SaveAsUE5(dir, n);
+                SaveAsUE5(dir, n, n.world);
             }
         }
 
@@ -2445,6 +2446,39 @@ namespace IL2Modder.IL2
             }
         }
 
+        public void ExportHooks(TextWriter t)
+        {
+            foreach (Node n in root.children)
+            {
+                if (n is MeshNode)
+                {
+                    MeshNode mn = (MeshNode)n;
+                    mn.ExportHooks(t);
+                }
+
+            }
+            foreach (Node n in root.children)
+            {
+                ExportHooks(n, t);
+            }
+        }
+
+        void ExportHooks(Node n2, TextWriter t)
+        {
+            foreach (Node n in n2.children)
+            {
+                if (n is MeshNode)
+                {
+                    MeshNode mn = (MeshNode)n;
+                    mn.ExportHooks(t);
+                }
+
+            }
+            foreach (Node n in n2.children)
+            {
+                ExportHooks(n, t);
+            }
+        }
 
         void ExportCollisionMeshes(Node n2, String dir)
         {

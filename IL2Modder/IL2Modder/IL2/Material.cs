@@ -761,7 +761,7 @@ namespace IL2Modder.IL2
             else
                 writer.WriteLine("\tillum 1");
             writer.WriteLine("\td " + AlphaTestVal);
-            writer.WriteLine("\tmap_Kd " + tname);
+            writer.WriteLine("\tmap_Kd " + tname.Replace(".tga",".png"));
             writer.WriteLine("");
 
         }

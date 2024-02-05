@@ -51,6 +51,7 @@
             this.saveAsFBXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsOBJToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportForUE4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToUE5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.loadScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadCockpitScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,7 +139,7 @@
             this.hScrollBar4 = new System.Windows.Forms.HScrollBar();
             this.label6 = new System.Windows.Forms.Label();
             this.joystick1 = new IL2Modder.Joystick();
-            this.saveToUE5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportHooksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -251,7 +252,8 @@
             this.loadCockpitScriptToolStripMenuItem,
             this.loadWeaponLoadoutsToolStripMenuItem,
             this.toolStripSeparator4,
-            this.scanMeshToolStripMenuItem});
+            this.scanMeshToolStripMenuItem,
+            this.exportHooksToolStripMenuItem});
             this.meshToolStripMenuItem.Name = "meshToolStripMenuItem";
             this.meshToolStripMenuItem.Size = new System.Drawing.Size(52, 21);
             this.meshToolStripMenuItem.Text = "Mesh";
@@ -330,6 +332,13 @@
             this.exportForUE4ToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.exportForUE4ToolStripMenuItem.Text = "Export for UE4";
             this.exportForUE4ToolStripMenuItem.Click += new System.EventHandler(this.exportForUE4ToolStripMenuItem_Click);
+            // 
+            // saveToUE5ToolStripMenuItem
+            // 
+            this.saveToUE5ToolStripMenuItem.Name = "saveToUE5ToolStripMenuItem";
+            this.saveToUE5ToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.saveToUE5ToolStripMenuItem.Text = "Save to UE5";
+            this.saveToUE5ToolStripMenuItem.Click += new System.EventHandler(this.saveToUE5ToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -1184,12 +1193,12 @@
             this.joystick1.TabIndex = 34;
             this.joystick1.JoystickClicked += new IL2Modder.Joystick.JoystickHandler(this.joystick1_JoystickClicked);
             // 
-            // saveToUE5ToolStripMenuItem
+            // exportHooksToolStripMenuItem
             // 
-            this.saveToUE5ToolStripMenuItem.Name = "saveToUE5ToolStripMenuItem";
-            this.saveToUE5ToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.saveToUE5ToolStripMenuItem.Text = "Save to UE5";
-            this.saveToUE5ToolStripMenuItem.Click += new System.EventHandler(this.saveToUE5ToolStripMenuItem_Click);
+            this.exportHooksToolStripMenuItem.Name = "exportHooksToolStripMenuItem";
+            this.exportHooksToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.exportHooksToolStripMenuItem.Text = "Export hooks";
+            this.exportHooksToolStripMenuItem.Click += new System.EventHandler(this.exportHooksToolStripMenuItem_Click);
             // 
             // ButtonBar
             // 
@@ -1348,5 +1357,6 @@
         private System.Windows.Forms.CheckBox checkBox15;
         private System.Windows.Forms.ToolStripMenuItem exportForUE4ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToUE5ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportHooksToolStripMenuItem;
     }
 }

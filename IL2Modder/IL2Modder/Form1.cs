@@ -2713,5 +2713,21 @@ namespace IL2Modder
                 objectViewer1.ExportCollisionMeshes(fbd.SelectedPath);
             }
         }
+
+        public void ExportHooksToText()
+        {
+            SaveFileDialog ofd = new SaveFileDialog();
+            ofd.DefaultExt = "*.txt";
+            ofd.Filter = "Text files (*.txt)|*.txt";
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                using (TextWriter writer = File.CreateText(ofd.FileName))
+                {
+                    objectViewer1.ExportHooks(writer);
+                }
+            }
+        }
+
+
     }
 }

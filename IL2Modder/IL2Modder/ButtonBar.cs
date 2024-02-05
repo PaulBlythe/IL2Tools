@@ -528,5 +528,10 @@ namespace IL2Modder
         {
             Form1.Instance.SaveToUE5();
         }
+
+        private void exportHooksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1.Instance.ExportHooksToText();
+        }
     }
 }

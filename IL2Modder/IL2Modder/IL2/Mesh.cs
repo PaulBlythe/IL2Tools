@@ -225,6 +225,8 @@ namespace IL2Modder.IL2
                                 line = "";
                             if (line.StartsWith("\\"))
                                 line = "";
+                            if (line.StartsWith("//"))
+                                line = "";
                             if ((line.StartsWith("[NFrames")) || (line.StartsWith("[NBlocks")))
                             {
                                 line = line.TrimStart('[');
@@ -389,6 +391,7 @@ namespace IL2Modder.IL2
                                                 mode = MeshLoaderMode.ShadowFaces;
                                                 used = true;
                                             }
+                                          
                                             if ((line.StartsWith("[LOD", StringComparison.OrdinalIgnoreCase)) && !used)
                                             {
                                                 Lod l = new Lod(reader, dir);
@@ -1404,6 +1407,15 @@ namespace IL2Modder.IL2
                                         }
                                     }
                                     break;
+                                case 0:
+                                    b.ReadByte();
+                                    LodDistances.Add(lod_distance);
+                                    for (int j = 0; j < bfile.table1[i].NumberOfRecords - 1; j++)
+                                    {
+                                        lod_distance += (Int16)b.ReadSingle();
+                                        LodDistances.Add(lod_distance);
+                                    }
+                                    break;
                                 case 258:
                                 case 0x02:
                                     {
@@ -1505,6 +1517,21 @@ namespace IL2Modder.IL2
                                         Hooks[k].matrix.M41 = b.ReadSingle();
                                         Hooks[k].matrix.M42 = b.ReadSingle();
                                         Hooks[k].matrix.M43 = b.ReadSingle();
+                                        break;
+
+                                    case 40:
+                                        Hooks[k].matrix.M11 = b.ReadSingle();
+                                        Hooks[k].matrix.M12 = b.ReadSingle();
+                                        Hooks[k].matrix.M13 = b.ReadSingle();
+                                        Hooks[k].matrix.M21 = b.ReadSingle();
+                                        Hooks[k].matrix.M22 = b.ReadSingle();
+                                        Hooks[k].matrix.M23 = b.ReadSingle();
+                                        Hooks[k].matrix.M31 = b.ReadSingle();
+                                        Hooks[k].matrix.M32 = b.ReadSingle();
+                                        Hooks[k].matrix.M33 = b.ReadSingle();
+                                        Hooks[k].matrix.M41 = b.ReadSingle();
+                                        Hooks[k].matrix.M42 = 0;
+                                        Hooks[k].matrix.M43 = 0;
                                         break;
 
                                     default:
@@ -3007,6 +3034,8 @@ namespace IL2Modder.IL2
 
         public void SaveHooks(TextWriter tw)
         {
+            tw.WriteLine("//  " + mesh_name);
+
             if (Hooks.Count > 0)
             {
                 tw.WriteLine("[Hooks]");
@@ -3023,8 +3052,12 @@ namespace IL2Modder.IL2
                 }
                 tw.WriteLine("");
                 tw.WriteLine("[HookLoc]");
+
+               
                 foreach (Hook h in Hooks)
                 {
+                    Vector3 res = Vector3.Transform(Vector3.Zero, h.matrix);
+
                     tw.Write(String.Format("{0} ", h.matrix.M11));
                     tw.Write(String.Format("{0} ", h.matrix.M12));
                     tw.Write(String.Format("{0} ", h.matrix.M13));
@@ -3035,8 +3068,10 @@ namespace IL2Modder.IL2
                     tw.Write(String.Format("{0} ", h.matrix.M32));
                     tw.Write(String.Format("{0} ", h.matrix.M33));
                     tw.Write(String.Format("{0} ", h.matrix.M41));
-                    tw.Write(String.Format("{0} ", h.matrix.M42));
-                    tw.WriteLine(String.Format("{0}", h.matrix.M43));
+                    tw.Write(String.Format("{0} ", h.matrix.M42));              
+                    tw.Write(String.Format("{0}", h.matrix.M43));
+
+                    tw.WriteLine(String.Format("      {0} ", res));
                 }
                 tw.WriteLine("");
             }
@@ -4490,12 +4525,12 @@ namespace IL2Modder.IL2
             return new FbxVector2(x, y);
         }
 
-        public void SaveAsUE5(String dir, String Name)
+        public void SaveAsUE5(String dir, String Name, Matrix World)
         {
             String name = Path.Combine(dir, Name + "_" + mesh_name);
             name += ".obj";
             String matname = "mat_" + Name + "_" + mesh_name;
-            Matrix rot = Matrix.CreateScale(100);
+            Matrix rot = Matrix.CreateScale(100) * World;
 
             using (TextWriter writer = File.CreateText(name))
             {

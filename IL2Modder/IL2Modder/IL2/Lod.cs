@@ -197,7 +197,7 @@ namespace IL2Modder.IL2
             while (true)
             {
                 line = reader.ReadLine();
-                if (line.Length == 0)
+                if (line.Length < 2)
                     return;
 
                 parts = line.Split(seperators, StringSplitOptions.RemoveEmptyEntries);
