@@ -2042,7 +2042,7 @@ namespace IL2Modder.IL2
                     MeshNode mn = (MeshNode)n;
                     mn.mesh.SaveAsUE5(dir, Name, world);
                 }
-                SaveAsUE5(dir, n, n.world);
+                SaveAsUE5(dir, n, n.world * world);
             }
         }
 
