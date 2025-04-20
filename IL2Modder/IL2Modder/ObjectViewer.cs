@@ -2434,6 +2434,13 @@ namespace IL2Modder
             mesh.SaveAsObj(directory);
             material_writer.Close();
         }
+        public void SaveAsObj2(String directory, String name)
+        {
+            saved_materials.Clear();
+            material_writer = File.CreateText(directory + "//il2mat.mtl");
+            mesh.SaveAsObj2(directory, name);
+            material_writer.Close();
+        }
         #endregion
 
         #region FBX

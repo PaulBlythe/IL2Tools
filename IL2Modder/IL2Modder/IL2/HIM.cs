@@ -30,7 +30,7 @@ namespace IL2Modder.IL2
         Random rand = new Random();
 
         public List<Animator> animators = new List<Animator>();
-        String Name;
+        public String Name;
         public int nProps;
         public int nRudders;
         public int nFlaps;
@@ -1989,6 +1989,30 @@ namespace IL2Modder.IL2
                 SaveAsObj(n, dir);
             }
         }
+        public void SaveAsObj2(String dir, String name)
+        {
+            foreach (Node n in root.children)
+            {
+                if (n is MeshNode)
+                {
+                    MeshNode mn = (MeshNode)n;
+                    mn.mesh.SaveAsOBJ2(dir, "il2mat", n.world, name);
+                }
+                SaveAsObj2(n, dir, n.world, name);
+            }
+        }
+        public void SaveAsObj2(Node n2, String dir, Matrix World, String name)
+        {
+            foreach (Node n in n2.children)
+            {
+                if (n is MeshNode)
+                {
+                    MeshNode mn = (MeshNode)n;
+                    mn.mesh.SaveAsOBJ2(dir, "il2mat", n.world * World, name);
+                }
+                SaveAsObj2(n, dir, n.world * World, name);
+            }
+        }
         #endregion
 
         public void SaveAsUE4(string dir)
@@ -2020,29 +2044,55 @@ namespace IL2Modder.IL2
 
         public void SaveAsUE5(string dir)
         {
+            String name = Path.Combine(dir, Name + "_structure");
+            name += ".txt";
+            TextWriter writer = File.CreateText(name);
+
             Matrix world = Matrix.Identity;
             foreach (Node n in root.children)
             {
                 if (n is MeshNode)
                 {
                     MeshNode mn = (MeshNode)n;
-                    mn.mesh.SaveAsUE5(dir, Name, world);
-                }
-                SaveAsUE5(dir, n, n.world);
-            }
+                    mn.mesh.SaveAsUE5(dir, Name, world, writer);
+                    WriteDecomposedMatrix(mn.mesh.mesh_name, n.world, writer);
 
+                }
+                SaveAsUE5(dir, n, n.world, writer);
+            }
+            writer.Close();
+        }
+        
+
+        public void WriteDecomposedMatrix(String name, Matrix world, TextWriter structure_writer)
+        {
+            Vector3 scale;
+            Vector3 trans;
+            Quaternion q;
+            world.Decompose(out scale, out q, out trans);
+            trans *= 100.0f;
+            structure_writer.Write(name + ",");
+            structure_writer.Write("Scale " + scale.ToString() + ",");
+            structure_writer.Write("Trans " + trans.ToString() + ",");
+            var yaw = Math.Atan2(2.0 * (q.Y * q.Z + q.W * q.X), q.W * q.W - q.X * q.X - q.Y * q.Y + q.Z * q.Z);
+            var pitch = Math.Asin(-2.0 * (q.X * q.Z - q.W * q.Y));
+            var roll = Math.Atan2(2.0 * (q.X * q.Y + q.W * q.Z), q.W * q.W + q.X * q.X - q.Y * q.Y - q.Z * q.Z);
+            structure_writer.Write("Yaw " + MathHelper.ToDegrees((float)yaw).ToString() + ",");
+            structure_writer.Write("Pitch " + MathHelper.ToDegrees((float)pitch).ToString() + ",");
+            structure_writer.WriteLine("Roll " + MathHelper.ToDegrees((float)roll).ToString());
         }
 
-        public void SaveAsUE5(string dir, Node n2, Matrix world)
+        public void SaveAsUE5(string dir, Node n2, Matrix world, TextWriter writer)
         {
             foreach (Node n in n2.children)
             {
                 if (n is MeshNode)
                 {
                     MeshNode mn = (MeshNode)n;
-                    mn.mesh.SaveAsUE5(dir, Name, world);
+                    mn.mesh.SaveAsUE5(dir, Name, world, writer);
+                    WriteDecomposedMatrix(mn.mesh.mesh_name, n2.world, writer);
                 }
-                SaveAsUE5(dir, n, n.world * world);
+                SaveAsUE5(dir, n, n.world * world, writer);
             }
         }
 

@@ -3499,6 +3499,55 @@ namespace IL2Modder.IL2
             }
         }
 
+        public void SaveAsOBJ2(String dir, String matname, Matrix World, String objname)
+        {
+            String name = Path.Combine(dir, objname + "_" + mesh_name);
+            name += ".obj";
+            World.Translation = new Vector3(0, 0, 0);
+            using (TextWriter writer = File.CreateText(name))
+            {
+                writer.WriteLine("mtllib " + matname + ".mtl");
+                writer.WriteLine("");
+                writer.WriteLine("");
+                for (int i = 0; i < Verts.Length; i++)
+                {
+                    Vector3 rp = Vector3.Transform(Verts[i].Position, World);
+                    writer.WriteLine(String.Format("v {0} {1} {2}", rp.X, rp.Y, rp.Z));
+                    Vector3 np = Vector3.TransformNormal(Verts[i].Normal, World);
+                    writer.WriteLine(String.Format("vn {0} {1} {2}", np.X, np.Y, np.Z));
+                    writer.WriteLine(String.Format("vt {0} {1}", Verts[i].TextureCoordinate.X, Verts[i].TextureCoordinate.Y));
+                }
+                foreach (FaceGroup f in FaceGroups)
+                {
+                    writer.WriteLine(String.Format("g group_{0}", Materials[f.Material].Name));
+                    writer.WriteLine(String.Format("usemtl {0}", Materials[f.Material].Name));
+                    writer.WriteLine("");
+                    int si = f.StartFace * 3;
+                    for (int i = 0; i < f.FaceCount; i++)
+                    {
+                        int v1, v2, v3;
+                        v1 = 1 + f.StartVertex + indices[si++];
+                        v2 = 1 + f.StartVertex + indices[si++];
+                        v3 = 1 + f.StartVertex + indices[si++];
+
+                        writer.WriteLine(String.Format("f {0}/{0}/{0} {1}/{1}/{1} {2}/{2}/{2}", v1, v2, v3));
+
+                    }
+                    writer.WriteLine("");
+
+                    Material m = Materials[f.Material];
+                    if (!ObjectViewer.saved_materials.Contains(m.Name))
+                    {
+                        ObjectViewer.saved_materials.Add(m.Name);
+                        m.Saveobj(ObjectViewer.material_writer);
+                    }
+                }
+                writer.Close();
+            }
+            SaveMaterials(dir);
+        }
+
+
         public void SaveToFox1(String dir, Node n, TextWriter g)
         {
             String filename = Path.Combine(dir, n.Name);
@@ -4525,12 +4574,30 @@ namespace IL2Modder.IL2
             return new FbxVector2(x, y);
         }
 
-        public void SaveAsUE5(String dir, String Name, Matrix World)
+        public void SaveAsUE5(String dir, String Name, Matrix World, TextWriter structure_writer)
         {
             String name = Path.Combine(dir, Name + "_" + mesh_name);
             name += ".obj";
             String matname = "mat_" + Name + "_" + mesh_name;
             Matrix rot = Matrix.CreateScale(100) * World;
+
+            //#region structure
+            //Vector3 scale;
+            //Vector3 trans;
+            //Quaternion q;
+            //localMatrix.Decompose(out scale, out q, out trans);
+            //trans *= 100.0f;
+            //structure_writer.Write(mesh_name + ",");
+            //structure_writer.Write("Scale " + scale.ToString() + ",");
+            //structure_writer.Write("Trans " + trans.ToString() + ",");
+            //var yaw = Math.Atan2(2.0 * (q.Y * q.Z + q.W * q.X), q.W * q.W - q.X * q.X - q.Y * q.Y + q.Z * q.Z);
+            //var pitch = Math.Asin(-2.0 * (q.X * q.Z - q.W * q.Y));
+            //var roll = Math.Atan2(2.0 * (q.X * q.Y + q.W * q.Z), q.W * q.W + q.X * q.X - q.Y * q.Y - q.Z * q.Z);
+            //structure_writer.Write("Yaw " + MathHelper.ToDegrees((float)yaw).ToString() + ",");
+            //structure_writer.Write("Pitch " + MathHelper.ToDegrees((float)pitch).ToString() + ",");
+            //structure_writer.WriteLine("Roll " + MathHelper.ToDegrees((float)roll).ToString());
+            //#endregion
+            //
 
             using (TextWriter writer = File.CreateText(name))
             {

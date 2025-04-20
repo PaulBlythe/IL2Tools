@@ -1034,6 +1034,37 @@ namespace IL2Modder
                 b.Save(dir + "\\" + Path.GetFileNameWithoutExtension(Names[i]) + ".png", ImageFormat.Png);
             }
         }
+        public void Serialise(String dir, String name)
+        {
+            for (int i = 0; i < Textures.Count; i++)
+            {
+                Texture2D t = Textures[i];
+                byte[] textureData = new byte[4 * t.Width * t.Height];
+                t.GetData<byte>(textureData);
+
+                for (int j = 0; j < 4 * t.Width * t.Height; j += 4)
+                {
+                    byte r = textureData[j];
+                    byte g = textureData[j + 2];
+                    textureData[j + 2] = r;
+                    textureData[j] = g;
+                }
+
+                Bitmap b = new Bitmap(t.Width, t.Height, PixelFormat.Format32bppArgb);
+
+                System.Drawing.Imaging.BitmapData bmpData = b.LockBits(
+                   new System.Drawing.Rectangle(0, 0, t.Width, t.Height),
+                   System.Drawing.Imaging.ImageLockMode.WriteOnly,
+                   System.Drawing.Imaging.PixelFormat.Format32bppArgb
+                 );
+
+                IntPtr safePtr = bmpData.Scan0;
+                System.Runtime.InteropServices.Marshal.Copy(textureData, 0, safePtr, textureData.Length);
+                b.UnlockBits(bmpData);
+
+                b.Save(dir + "\\" + name + "_" + Path.GetFileNameWithoutExtension(Names[i]) + ".png", ImageFormat.Png);
+            }
+        }
 
         public void SaveTexture(String src, String dest)
         {

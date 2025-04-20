@@ -281,7 +281,7 @@ namespace IL2Modder
                 current_object = new HIM(ofd.FileName);
                 ShotName = Path.GetDirectoryName(ofd.FileName) + ".png";
                 ShotName = Path.GetFileNameWithoutExtension(ShotName);
-
+                this.Text = current_object.Name;
                 TreeNode tn = new TreeNode("_ROOT_");
                 tn.Tag = null;
                 tn.Checked = true;
@@ -2372,6 +2372,15 @@ namespace IL2Modder
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                 objectViewer1.SaveAsObj(fbd.SelectedPath);
+            }
+        }
+        public void SaveAsObj2()
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                objectViewer1.SaveAsObj2(fbd.SelectedPath,current_object.Name);
+                Manager.Serialise(fbd.SelectedPath, current_object.Name);
             }
         }
 

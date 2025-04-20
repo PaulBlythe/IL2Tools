@@ -58,6 +58,7 @@
             this.loadWeaponLoadoutsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.scanMeshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportHooksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeSkyboxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -139,7 +140,7 @@
             this.hScrollBar4 = new System.Windows.Forms.HScrollBar();
             this.label6 = new System.Windows.Forms.Label();
             this.joystick1 = new IL2Modder.Joystick();
-            this.exportHooksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsObjTransformedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -253,7 +254,8 @@
             this.loadWeaponLoadoutsToolStripMenuItem,
             this.toolStripSeparator4,
             this.scanMeshToolStripMenuItem,
-            this.exportHooksToolStripMenuItem});
+            this.exportHooksToolStripMenuItem,
+            this.saveAsObjTransformedToolStripMenuItem});
             this.meshToolStripMenuItem.Name = "meshToolStripMenuItem";
             this.meshToolStripMenuItem.Size = new System.Drawing.Size(52, 21);
             this.meshToolStripMenuItem.Text = "Mesh";
@@ -261,122 +263,129 @@
             // loadHimToolStripMenuItem
             // 
             this.loadHimToolStripMenuItem.Name = "loadHimToolStripMenuItem";
-            this.loadHimToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.loadHimToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.loadHimToolStripMenuItem.Text = "Load him";
             this.loadHimToolStripMenuItem.Click += new System.EventHandler(this.loadHimToolStripMenuItem_Click);
             // 
             // saveHimToolStripMenuItem
             // 
             this.saveHimToolStripMenuItem.Name = "saveHimToolStripMenuItem";
-            this.saveHimToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.saveHimToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.saveHimToolStripMenuItem.Text = "Save him";
             this.saveHimToolStripMenuItem.Click += new System.EventHandler(this.saveHimToolStripMenuItem_Click);
             // 
             // newHimToolStripMenuItem
             // 
             this.newHimToolStripMenuItem.Name = "newHimToolStripMenuItem";
-            this.newHimToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.newHimToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.newHimToolStripMenuItem.Text = "New him";
             this.newHimToolStripMenuItem.Click += new System.EventHandler(this.newHimToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(207, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(216, 6);
             // 
             // load3DSFileToolStripMenuItem
             // 
             this.load3DSFileToolStripMenuItem.Name = "load3DSFileToolStripMenuItem";
-            this.load3DSFileToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.load3DSFileToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.load3DSFileToolStripMenuItem.Text = "Load 3DS file";
             this.load3DSFileToolStripMenuItem.Click += new System.EventHandler(this.load3DSFileToolStripMenuItem_Click);
             // 
             // loadACToolStripMenuItem
             // 
             this.loadACToolStripMenuItem.Name = "loadACToolStripMenuItem";
-            this.loadACToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.loadACToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.loadACToolStripMenuItem.Text = "Load AC";
             this.loadACToolStripMenuItem.Click += new System.EventHandler(this.loadACToolStripMenuItem_Click);
             // 
             // saveAsDAEToolStripMenuItem
             // 
             this.saveAsDAEToolStripMenuItem.Name = "saveAsDAEToolStripMenuItem";
-            this.saveAsDAEToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.saveAsDAEToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.saveAsDAEToolStripMenuItem.Text = "Save as DAE";
             this.saveAsDAEToolStripMenuItem.Click += new System.EventHandler(this.saveAsDAEToolStripMenuItem_Click);
             // 
             // saveAsOGREToolStripMenuItem
             // 
             this.saveAsOGREToolStripMenuItem.Name = "saveAsOGREToolStripMenuItem";
-            this.saveAsOGREToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.saveAsOGREToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.saveAsOGREToolStripMenuItem.Text = "Save as OGRE";
             this.saveAsOGREToolStripMenuItem.Click += new System.EventHandler(this.saveAsOGREToolStripMenuItem_Click);
             // 
             // saveAsFBXToolStripMenuItem
             // 
             this.saveAsFBXToolStripMenuItem.Name = "saveAsFBXToolStripMenuItem";
-            this.saveAsFBXToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.saveAsFBXToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.saveAsFBXToolStripMenuItem.Text = "Save as FBX";
             this.saveAsFBXToolStripMenuItem.Click += new System.EventHandler(this.saveAsFBXToolStripMenuItem_Click);
             // 
             // saveAsOBJToolStripMenuItem
             // 
             this.saveAsOBJToolStripMenuItem.Name = "saveAsOBJToolStripMenuItem";
-            this.saveAsOBJToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.saveAsOBJToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.saveAsOBJToolStripMenuItem.Text = "Save as OBJ";
             this.saveAsOBJToolStripMenuItem.Click += new System.EventHandler(this.saveAsOBJToolStripMenuItem_Click);
             // 
             // exportForUE4ToolStripMenuItem
             // 
             this.exportForUE4ToolStripMenuItem.Name = "exportForUE4ToolStripMenuItem";
-            this.exportForUE4ToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.exportForUE4ToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.exportForUE4ToolStripMenuItem.Text = "Export for UE4";
             this.exportForUE4ToolStripMenuItem.Click += new System.EventHandler(this.exportForUE4ToolStripMenuItem_Click);
             // 
             // saveToUE5ToolStripMenuItem
             // 
             this.saveToUE5ToolStripMenuItem.Name = "saveToUE5ToolStripMenuItem";
-            this.saveToUE5ToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.saveToUE5ToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.saveToUE5ToolStripMenuItem.Text = "Save to UE5";
             this.saveToUE5ToolStripMenuItem.Click += new System.EventHandler(this.saveToUE5ToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(207, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(216, 6);
             // 
             // loadScriptToolStripMenuItem
             // 
             this.loadScriptToolStripMenuItem.Name = "loadScriptToolStripMenuItem";
-            this.loadScriptToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.loadScriptToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.loadScriptToolStripMenuItem.Text = "Load script";
             this.loadScriptToolStripMenuItem.Click += new System.EventHandler(this.loadScriptToolStripMenuItem_Click);
             // 
             // loadCockpitScriptToolStripMenuItem
             // 
             this.loadCockpitScriptToolStripMenuItem.Name = "loadCockpitScriptToolStripMenuItem";
-            this.loadCockpitScriptToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.loadCockpitScriptToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.loadCockpitScriptToolStripMenuItem.Text = "Load cockpit script";
             this.loadCockpitScriptToolStripMenuItem.Click += new System.EventHandler(this.loadCockpitScriptToolStripMenuItem_Click);
             // 
             // loadWeaponLoadoutsToolStripMenuItem
             // 
             this.loadWeaponLoadoutsToolStripMenuItem.Name = "loadWeaponLoadoutsToolStripMenuItem";
-            this.loadWeaponLoadoutsToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.loadWeaponLoadoutsToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.loadWeaponLoadoutsToolStripMenuItem.Text = "Load weapon loadouts";
             this.loadWeaponLoadoutsToolStripMenuItem.Click += new System.EventHandler(this.loadWeaponLoadoutsToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(207, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(216, 6);
             // 
             // scanMeshToolStripMenuItem
             // 
             this.scanMeshToolStripMenuItem.Name = "scanMeshToolStripMenuItem";
-            this.scanMeshToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.scanMeshToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.scanMeshToolStripMenuItem.Text = "Scan mesh";
             this.scanMeshToolStripMenuItem.Click += new System.EventHandler(this.scanMeshToolStripMenuItem_Click);
+            // 
+            // exportHooksToolStripMenuItem
+            // 
+            this.exportHooksToolStripMenuItem.Name = "exportHooksToolStripMenuItem";
+            this.exportHooksToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.exportHooksToolStripMenuItem.Text = "Export hooks";
+            this.exportHooksToolStripMenuItem.Click += new System.EventHandler(this.exportHooksToolStripMenuItem_Click);
             // 
             // renderToolStripMenuItem
             // 
@@ -1193,12 +1202,12 @@
             this.joystick1.TabIndex = 34;
             this.joystick1.JoystickClicked += new IL2Modder.Joystick.JoystickHandler(this.joystick1_JoystickClicked);
             // 
-            // exportHooksToolStripMenuItem
+            // saveAsObjTransformedToolStripMenuItem
             // 
-            this.exportHooksToolStripMenuItem.Name = "exportHooksToolStripMenuItem";
-            this.exportHooksToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.exportHooksToolStripMenuItem.Text = "Export hooks";
-            this.exportHooksToolStripMenuItem.Click += new System.EventHandler(this.exportHooksToolStripMenuItem_Click);
+            this.saveAsObjTransformedToolStripMenuItem.Name = "saveAsObjTransformedToolStripMenuItem";
+            this.saveAsObjTransformedToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.saveAsObjTransformedToolStripMenuItem.Text = "Save as obj transformed";
+            this.saveAsObjTransformedToolStripMenuItem.Click += new System.EventHandler(this.saveAsObjTransformedToolStripMenuItem_Click);
             // 
             // ButtonBar
             // 
@@ -1358,5 +1367,6 @@
         private System.Windows.Forms.ToolStripMenuItem exportForUE4ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToUE5ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportHooksToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveAsObjTransformedToolStripMenuItem;
     }
 }

@@ -533,5 +533,10 @@ namespace IL2Modder
         {
             Form1.Instance.ExportHooksToText();
         }
+
+        private void saveAsObjTransformedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1.Instance.SaveAsObj2();
+        }
     }
 }
