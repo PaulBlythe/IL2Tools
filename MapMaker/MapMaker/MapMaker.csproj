@@ -57,6 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\Core.cs" />
+    <Compile Include="Classes\UnavailableFilesList.cs" />
     <Compile Include="Classes\Delta.cs" />
     <Compile Include="Classes\ProjectSettings.cs" />
     <Compile Include="Classes\SHP\SHPElement.cs" />
