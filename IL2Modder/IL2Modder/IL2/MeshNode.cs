@@ -38,6 +38,7 @@ namespace IL2Modder.IL2
             Hidden = mn.Hidden;
             Seperable = mn.Seperable;
             world = Matrix.Identity * mn.world;
+            Start = mn.Start;
 
             Type = mn.Type;
             foreach (Node n in mn.children)

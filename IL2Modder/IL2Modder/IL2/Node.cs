@@ -30,6 +30,8 @@ namespace IL2Modder.IL2
         public FbxNode fbx_node = null;
         public int Damage;
         public bool originalHidden = false;
+        public Vector3 Start;
+
 
         public Node(String data)
         {
@@ -61,7 +63,8 @@ namespace IL2Modder.IL2
             n2.Name = copy.Name;
             n2.Hidden = copy.Hidden;
             n2.Seperable = copy.Seperable;
-            n2.world = Matrix.Identity * copy.world; 
+            n2.world = Matrix.Identity * copy.world;
+            n2.Start = copy.Start;
             
             n2.Type = copy.Type;
             foreach (Node n in copy.children)

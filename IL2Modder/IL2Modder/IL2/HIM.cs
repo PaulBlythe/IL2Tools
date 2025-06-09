@@ -180,6 +180,8 @@ namespace IL2Modder.IL2
                                         node.world.M42 = float.Parse(parts[11], System.Globalization.CultureInfo.InvariantCulture);
                                         node.world.M43 = float.Parse(parts[12], System.Globalization.CultureInfo.InvariantCulture);
                                         node.base_matrix = node.world;
+                                        node.Start = new Vector3(node.world.M41, node.world.M42, node.world.M43);
+
                                         used = true;
                                     }
                                     if (parts[0].Equals("Hidden", StringComparison.OrdinalIgnoreCase))
@@ -1989,28 +1991,41 @@ namespace IL2Modder.IL2
                 SaveAsObj(n, dir);
             }
         }
-        public void SaveAsObj2(String dir, String name)
+        public void SaveAsObj2(String dir, String name, TextWriter tw)
         {
             foreach (Node n in root.children)
             {
                 if (n is MeshNode)
                 {
                     MeshNode mn = (MeshNode)n;
+
+                    Vector3 loc = n.Start;
+                    Matrix temp = n.world;
+                    temp.Translation = Vector3.Zero;
+                    Vector3 loc2 = Vector3.Transform(loc, temp);
+                    tw.WriteLine(String.Format("{0} at {1},{2},{3}", mn.Name, loc2.X * 100.0f, loc2.Y * 100.0f , loc2.Z * -100.0f));
+
                     mn.mesh.SaveAsOBJ2(dir, "il2mat", n.world, name);
                 }
-                SaveAsObj2(n, dir, n.world, name);
+                SaveAsObj2(n, dir, n.world, name, tw);
             }
         }
-        public void SaveAsObj2(Node n2, String dir, Matrix World, String name)
+        public void SaveAsObj2(Node n2, String dir, Matrix World, String name, TextWriter tw)
         {
             foreach (Node n in n2.children)
             {
                 if (n is MeshNode)
                 {
                     MeshNode mn = (MeshNode)n;
+
+                    Vector3 loc = n2.Start;
+                    Matrix temp = n2.world * World;
+                    temp.Translation = Vector3.Zero;
+                    Vector3 loc2 = Vector3.Transform(loc, temp);
+                    tw.WriteLine(String.Format("{0} at {1},{2},{3}", n.Name, loc2.X * 100.0f, loc2.Y * 100.0f, loc2.Z * -100.0f));
                     mn.mesh.SaveAsOBJ2(dir, "il2mat", n.world * World, name);
                 }
-                SaveAsObj2(n, dir, n.world * World, name);
+                SaveAsObj2(n, dir, n.world * World, name, tw);
             }
         }
         #endregion

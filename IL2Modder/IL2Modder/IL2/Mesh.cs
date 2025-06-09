@@ -1253,6 +1253,16 @@ namespace IL2Modder.IL2
         #endregion
 
         #region BinaryReaders
+        private float ReadEncodedFloat(BinaryReader b)
+        {
+            if (b.ReadByte() == 0)
+            {
+                Int16 i = b.ReadInt16();
+                return (float)i;
+            }
+            return b.ReadSingle();
+        }
+
         public void ReadBinary(String name, String dir)
         {
             byte re = 0;
@@ -1520,18 +1530,18 @@ namespace IL2Modder.IL2
                                         break;
 
                                     case 40:
-                                        Hooks[k].matrix.M11 = b.ReadSingle();
-                                        Hooks[k].matrix.M12 = b.ReadSingle();
-                                        Hooks[k].matrix.M13 = b.ReadSingle();
-                                        Hooks[k].matrix.M21 = b.ReadSingle();
-                                        Hooks[k].matrix.M22 = b.ReadSingle();
-                                        Hooks[k].matrix.M23 = b.ReadSingle();
-                                        Hooks[k].matrix.M31 = b.ReadSingle();
-                                        Hooks[k].matrix.M32 = b.ReadSingle();
-                                        Hooks[k].matrix.M33 = b.ReadSingle();
-                                        Hooks[k].matrix.M41 = b.ReadSingle();
-                                        Hooks[k].matrix.M42 = 0;
-                                        Hooks[k].matrix.M43 = 0;
+                                        Hooks[k].matrix.M11 = ReadEncodedFloat(b);
+                                        Hooks[k].matrix.M12 = ReadEncodedFloat(b);
+                                        Hooks[k].matrix.M13 = ReadEncodedFloat(b);
+                                        Hooks[k].matrix.M21 = ReadEncodedFloat(b);
+                                        Hooks[k].matrix.M22 = ReadEncodedFloat(b);
+                                        Hooks[k].matrix.M23 = ReadEncodedFloat(b);
+                                        Hooks[k].matrix.M31 = ReadEncodedFloat(b);
+                                        Hooks[k].matrix.M32 = ReadEncodedFloat(b);
+                                        Hooks[k].matrix.M33 = ReadEncodedFloat(b);
+                                        Hooks[k].matrix.M41 = ReadEncodedFloat(b);
+                                        Hooks[k].matrix.M42 = ReadEncodedFloat(b);
+                                        Hooks[k].matrix.M43 = ReadEncodedFloat(b);
                                         break;
 
                                     default:
@@ -3056,22 +3066,35 @@ namespace IL2Modder.IL2
                
                 foreach (Hook h in Hooks)
                 {
-                    Vector3 res = Vector3.Transform(Vector3.Zero, h.matrix);
-
-                    tw.Write(String.Format("{0} ", h.matrix.M11));
-                    tw.Write(String.Format("{0} ", h.matrix.M12));
-                    tw.Write(String.Format("{0} ", h.matrix.M13));
-                    tw.Write(String.Format("{0} ", h.matrix.M21));
-                    tw.Write(String.Format("{0} ", h.matrix.M22));
-                    tw.Write(String.Format("{0} ", h.matrix.M23));
-                    tw.Write(String.Format("{0} ", h.matrix.M31));
-                    tw.Write(String.Format("{0} ", h.matrix.M32));
-                    tw.Write(String.Format("{0} ", h.matrix.M33));
-                    tw.Write(String.Format("{0} ", h.matrix.M41));
-                    tw.Write(String.Format("{0} ", h.matrix.M42));              
-                    tw.Write(String.Format("{0}", h.matrix.M43));
-
-                    tw.WriteLine(String.Format("      {0} ", res));
+                    //Vector3 res = Vector3.Transform(Vector3.Zero, h.matrix);
+                    //
+                    //tw.Write(String.Format("{0} ", h.matrix.M11));
+                    //tw.Write(String.Format("{0} ", h.matrix.M12));
+                    //tw.Write(String.Format("{0} ", h.matrix.M13));
+                    //tw.Write(String.Format("{0} ", h.matrix.M21));
+                    //tw.Write(String.Format("{0} ", h.matrix.M22));
+                    //tw.Write(String.Format("{0} ", h.matrix.M23));
+                    //tw.Write(String.Format("{0} ", h.matrix.M31));
+                    //tw.Write(String.Format("{0} ", h.matrix.M32));
+                    //tw.Write(String.Format("{0} ", h.matrix.M33));
+                    //tw.Write(String.Format("{0} ", h.matrix.M41));
+                    //tw.Write(String.Format("{0} ", h.matrix.M42));              
+                    //tw.Write(String.Format("{0}", h.matrix.M43));
+                    //
+                    //tw.WriteLine(String.Format("      {0} ", res));
+                    //
+                    Vector3 scale;
+                    Vector3 trans;
+                    Quaternion q;
+                    h.matrix.Decompose(out scale, out q, out trans);
+                    tw.Write("Scale " + scale.ToString());
+                    tw.Write("   Trans " + trans.ToString());
+                    var yaw = Math.Atan2(2.0 * (q.Y * q.Z + q.W * q.X), q.W * q.W - q.X * q.X - q.Y * q.Y + q.Z * q.Z);
+                    var pitch = Math.Asin(-2.0 * (q.X * q.Z - q.W * q.Y));
+                    var roll = Math.Atan2(2.0 * (q.X * q.Y + q.W * q.Z), q.W * q.W + q.X * q.X - q.Y * q.Y - q.Z * q.Z);
+                    tw.Write("  Yaw " + MathHelper.ToDegrees((float)yaw).ToString());
+                    tw.Write("  Pitch " + MathHelper.ToDegrees((float)pitch).ToString());
+                    tw.WriteLine("  Roll " + MathHelper.ToDegrees((float)roll).ToString());
                 }
                 tw.WriteLine("");
             }
@@ -3504,6 +3527,7 @@ namespace IL2Modder.IL2
             String name = Path.Combine(dir, objname + "_" + mesh_name);
             name += ".obj";
             World.Translation = new Vector3(0, 0, 0);
+
             using (TextWriter writer = File.CreateText(name))
             {
                 writer.WriteLine("mtllib " + matname + ".mtl");

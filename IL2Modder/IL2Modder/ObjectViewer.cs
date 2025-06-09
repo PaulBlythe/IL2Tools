@@ -2436,10 +2436,13 @@ namespace IL2Modder
         }
         public void SaveAsObj2(String directory, String name)
         {
+            String locs = Path.Combine(directory, "locs.txt");
+            TextWriter tw = File.CreateText(locs);
             saved_materials.Clear();
             material_writer = File.CreateText(directory + "//il2mat.mtl");
-            mesh.SaveAsObj2(directory, name);
+            mesh.SaveAsObj2(directory, name, tw);
             material_writer.Close();
+            tw.Close();
         }
         #endregion
 
